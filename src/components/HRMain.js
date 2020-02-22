@@ -56,7 +56,7 @@ export class HRMain extends Component {
             <div className="container" id="blur">
                 <div className="card">
                     <div className="imgBx" data-text="design">
-                        <img src="../../public/design.png" alt={"not found"}/>
+                        <img src={"/design.png"} alt={"not found"}/>
                     </div>
                     <div className="content">
                         <div>
@@ -69,7 +69,7 @@ export class HRMain extends Component {
                 </div>
                 <div className="card">
                     <div className="imgBx" data-text="code">
-                        <img src="../../public/code.png" alt={"not found"}/>
+                        <img src={"/code.png"} alt={"not found"}/>
                     </div>
                     <div className="content">
                         <div>
@@ -82,7 +82,7 @@ export class HRMain extends Component {
                 </div>
                 <div className="card">
                     <div className="imgBx" data-text="launch">
-                        <img src="../../public/launch.png" alt={"not found"}/>
+                        <img src={"/launch.png"} alt={"not found"}/>
                     </div>
                     <div className="content">
                         <div>
@@ -95,7 +95,7 @@ export class HRMain extends Component {
                 </div>
                 <div className="card">
                     <div className="imgBx" data-text="earn">
-                        <img src="../../public/earn.png" alt={"not found"}/>
+                        <img src={"/earn.png"} alt={"not found"}/>
                     </div>
                     <div className="content">
                         <div>

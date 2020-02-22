@@ -75,7 +75,7 @@
 .container .card .content {
     position: absolute;
     right: 0;
-    width: calc(100% - 75px);
+    width: calc(100% - 100px);
     height: 100%;
     padding: 20px;
     display: flex;
