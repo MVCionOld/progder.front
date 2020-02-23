@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import "./HRMain.css";
+import "./RecruiterWorkspace.css";
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\n" +
     "                                    incididunt ut.";
@@ -91,9 +91,9 @@ const cardsProps = [
 ];
 
 
-export class HRMain extends Component {
+export class RecruiterWorkspace extends Component {
     render() {
-        return <div className="hr-main-container">
+        return <div className="recruiter-main-container">
             <div className="container" id="blur">
                 {cardsProps.map(
                     cardProps => <Card imgSrc={cardProps.imgSrc} dataText={cardProps.dataText}/>

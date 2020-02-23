@@ -12,8 +12,8 @@ export class RoleSelection extends Component {
         return (
             <div className="navigation">
                 <ul>
-                    <Selection role={"Developer"}/>
-                    <Selection role={"Manager"}/>
+                    <Selection role={"Candidate"}/>
+                    <Selection role={"Recruiter"}/>
                 </ul>
             </div>
         );
