@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import "./LoginSignupForm.css";
 import {InputBox} from "./InputBox";
+import {SubmitButton} from "./SubmitButton";
 
 
 export class LoginForm extends Component {
@@ -51,7 +52,7 @@ export class LoginForm extends Component {
                             onChange={inputBoxProps.onChange}
                         />
                     }))}
-                    <input type="submit" name="" value="Submit"/>
+                    <SubmitButton/>
                 </form>
             </div>
         );

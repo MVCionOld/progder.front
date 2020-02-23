@@ -9,7 +9,7 @@ export class App extends React.Component {
         return (
             <div className="App">
                 {/*<ProgderBody />*/}
-                <LoginForm role={"recruiter"}/>
+                <SignupForm role={"recruiter"}/>
             </div>
         );
     }

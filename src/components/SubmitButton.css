@@ -1,0 +1,9 @@
+input[type="submit"] {
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #ff0057;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}

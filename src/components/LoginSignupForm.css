@@ -56,13 +56,3 @@
     pointer-events: none;
     transition: .3s;
 }
-
-.box input[type="submit"] {
-    border: none;
-    outline: none;
-    color: #fff;
-    background: #ff0057;
-    padding: 10px 20px;
-    cursor: pointer;
-    border-radius: 5px;
-}
