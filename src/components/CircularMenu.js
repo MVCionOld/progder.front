@@ -40,7 +40,7 @@ export class CircularMenu extends Component {
         const MenuItem = (props) => (
             <a href={props.href} className="circular-menu__item">{props.text}</a>
         );
-        let actions = [
+        const actions = [
             {
                 "name": "HTML",
                 "href": "#"
@@ -60,9 +60,9 @@ export class CircularMenu extends Component {
         ];
         return (
             <div className="circular-menu">
-                {actions.map(
-                    (action) => <MenuItem href={action.href} text={action.name}/>
-                )}
+                {actions.map(action => {
+                    return <MenuItem href={action.href} text={action.name}/>
+                })}
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a href="#" className="circular-menu__button">
                     <span className="circular-menu__lines"/>

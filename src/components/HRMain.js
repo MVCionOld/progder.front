@@ -9,132 +9,101 @@ const loremIpsumFull = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
     "                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in\n" +
     "                            culpa qui officia deserunt mollit anim id est laborum.";
 
-export class HRMain extends Component {
+class Card extends Component {
 
-    componentDidMount() {
-
+    constructor(props) {
+        super(props);
     }
 
+    toggle() {
+        let blur = document.getElementById("blur");
+        blur.classList.toggle("active");
+        let popup = document.getElementById(this.props.dataText);
+        popup.classList.toggle("active");
+    }
 
     render() {
-        function toggle(elem) {
-            console.log(elem);
-            let blur = document.getElementById("blur");
-            if (blur === null) {
-                return null;
-            }
-            blur.classList.toggle("active");
-            let popup = function (e) {
-                if (e === null) {
-                    const popupElem = document.getElementById('popup');
-                    return popupElem === null
-                        ? null
-                        : popupElem.getElementsByClassName('active')[0];
-                } else {
-                    let attr = null;
-                    for (let found = false, parentElem = e; !found; parentElem = parentElem.parentNode) {
-                        console.log(parentElem);
-                        for (const node of parentElem.childNodes) {
-                            if ('getAttribute' in node) {
-                                attr = node.getAttribute('data-text');
-                                if (attr != null && attr.length > 0) {
-                                    found = true;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    return document.getElementById(attr);
-                }
-            }(elem);
-            if (popup !== null) {
-                popup.classList.toggle("active");
-            }
-        }
+        return (
+            <div className="card">
+                <div className="imgBx" data-text={this.props.dataText}>
+                    <img src={this.props.imgSrc} alt={"not found"}/>
+                </div>
+                <div className="content">
+                    <div>
+                        <h3>{this.props.dataText}</h3>
+                        <p>{loremIpsum}</p>
+                        {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                        <a href="#" onClick={this.toggle.bind(this)}>Read more</a>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
 
+class Popup extends Component {
+
+    constructor(props) {
+        super(props);
+    }
+
+    toggle(elem) {
+        let blur = document.getElementById("blur");
+        blur.classList.toggle("active");
+        let popup = function (e) {
+            const popupElem = document.getElementById('popup');
+            return popupElem === null
+                ? null
+                : popupElem.getElementsByClassName('active')[0];
+        }(elem);
+        popup.classList.toggle("active");
+    }
+
+    render() {
+        return (
+            <div id={this.props.dataText}>
+                <h2>{this.props.dataText}</h2>
+                <p>{loremIpsumFull}</p>
+                {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
+                <a href="#" onClick={this.toggle.bind(this)}>Close</a>
+            </div>
+        );
+    }
+}
+
+const cardsProps = [
+    {
+        dataText: "Design",
+        imgSrc: "/design.png"
+    },
+    {
+        dataText: "Code",
+        imgSrc: "/code.png"
+    },
+    {
+        dataText: "Launch",
+        imgSrc: "/launch.png"
+    },
+    {
+        dataText: "Earn",
+        imgSrc: "/earn.png"
+    }
+];
+
+
+export class HRMain extends Component {
+    render() {
         return <div className="hr-main-container">
             <div className="container" id="blur">
-                <div className="card">
-                    <div className="imgBx" data-text="design">
-                        <img src={"/design.png"} alt={"not found"}/>
-                    </div>
-                    <div className="content">
-                        <div>
-                            <h3>Design</h3>
-                            <p>{loremIpsum}</p>
-                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                            <a href="#" onClick={() => toggle(this)}>Read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="card">
-                    <div className="imgBx" data-text="code">
-                        <img src={"/code.png"} alt={"not found"}/>
-                    </div>
-                    <div className="content">
-                        <div>
-                            <h3>Code</h3>
-                            <p>{loremIpsum}</p>
-                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                            <a href="#" onClick={() => toggle(this)}>Read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="card">
-                    <div className="imgBx" data-text="launch">
-                        <img src={"/launch.png"} alt={"not found"}/>
-                    </div>
-                    <div className="content">
-                        <div>
-                            <h3>Launch</h3>
-                            <p>{loremIpsum}</p>
-                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                            <a href="#" onClick={() => toggle(this)}>Read more</a>
-                        </div>
-                    </div>
-                </div>
-                <div className="card">
-                    <div className="imgBx" data-text="earn">
-                        <img src={"/earn.png"} alt={"not found"}/>
-                    </div>
-                    <div className="content">
-                        <div>
-                            <h3>Earn</h3>
-                            <p>{loremIpsum}</p>
-                            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                            <a href="#" onClick={() => toggle(this)}>Read more</a>
-                        </div>
-                    </div>
-                </div>
+                {cardsProps.map(
+                    cardProps => <Card imgSrc={cardProps.imgSrc} dataText={cardProps.dataText}/>
+                )}
             </div>
-
             <div id="popup">
-                <div id="earn">
-                    <h2>Earn</h2>
-                    <p>{loremIpsumFull}</p>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="#" onClick={() => toggle(null)}>Close</a>
-                </div>
-                <div id="code">
-                    <h2>Code</h2>
-                    <p>{loremIpsumFull}</p>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="#" onClick={() => toggle(null)}>Close</a>
-                </div>
-                <div id="launch">
-                    <h2>Launch</h2>
-                    <p>{loremIpsumFull}</p>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="#" onClick={() => toggle(null)}>Close</a>
-                </div>
-                <div id="design">
-                    <h2>Design</h2>
-                    <p>{loremIpsumFull}</p>
-                    {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                    <a href="#" onClick={() => toggle(null)}>Close</a>
-                </div>
+                {cardsProps.map(
+                    cardProps => <Popup dataText={cardProps.dataText}/>
+                )}
             </div>
-
         </div>;
     }
 }
