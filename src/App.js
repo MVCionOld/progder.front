@@ -1,15 +1,17 @@
 import React from 'react';
 import './App.css';
-import {LoginForm} from "./components/LoginForm";
-import {SignupForm} from "./components/SignupForm";
+import {CandidateWorkspace} from "./components/CandidateWorkspace";
+import {RecruiterWorkspace} from "./components/RecruiterWorkspace";
+import {CircularMenu} from "./components/CircularMenu";
 
 
 export class App extends React.Component {
+
     render() {
         return (
             <div className="App">
-                {/*<ProgderBody />*/}
-                <SignupForm role={"recruiter"}/>
+                <RecruiterWorkspace/>
+                <CircularMenu/>
             </div>
         );
     }

@@ -1,6 +1,12 @@
 import React, {Component} from 'react';
 
 
+export class CandidateWorkspace extends Component {
+
+    render() {
+        return <div/>;
+    }
+}
 // class ToDoItem extends React.Component {
 //
 //     constructor(props) {

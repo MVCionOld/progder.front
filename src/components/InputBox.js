@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import "./LoginSignupForm.css";
+import "./InputBox.css";
 
 
 export const InputBox = props => (
