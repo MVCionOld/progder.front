@@ -3,8 +3,9 @@ import './App.css';
 
 import {RecruiterWorkspace} from "./components/RecruiterWorkspace";
 import {CircularMenu} from "./components/CircularMenu";
-import {Login} from "./components/Login";
+import {LoginForm} from "./components/LoginForm";
 import {RoleSelection} from "./components/RoleSelection";
+import {SignupForm} from "./components/SignupForm";
 
 export class App extends React.Component {
     render() {
@@ -12,8 +13,7 @@ export class App extends React.Component {
             <div className="App">
                 {/*<RecruiterWorkspace/>*/}
                 {/*<CircularMenu/>*/}
-                <Login/>
-                {/*<RoleSelection/>*/}
+                <RoleSelection/>
             </div>
         );
     }
