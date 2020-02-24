@@ -1,20 +1,38 @@
 .engagement-item {
     position: relative;
     height: 250px;
-    background: #fff;
+    background: transparent;
     display: flex;
     width: 45%;
     margin: 30px 0;
+    transform-style: preserve-3d;
+    transform: perspective(700px) rotateX(0deg);
+    transition: 1s ease-in-out;
 }
 
 .engagement-item .content {
     position: absolute;
+    background: #fff;
     height: 100%;
     width: 100%;
     padding: 20px;
     display: flex;
     justify-content: center;
     align-items: center;
+    backface-visibility: hidden;
+    transition: 1s ease-in-out;
+}
+
+.engagement-item .content.selected.accepted {
+    transform: perspective(700px) rotateX(180deg);
+}
+
+.engagement-item .content.selected.rejected {
+    transform: perspective(700px) rotateX(-180deg);
+}
+
+h2, p {
+    margin: 10px;
 }
 
 .engagement-item .content h3 {
@@ -30,4 +48,60 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+.engagement-item .flip-card {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    transition: 1s ease-in-out;
+    backface-visibility: hidden;
+    transform: perspective(700px) rotateX(0deg);
+}
+
+.engagement-item .flip-card .accept,
+.engagement-item .flip-card .reject {
+    backface-visibility: hidden;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-style: preserve-3d;
+    transition: 1s ease-in-out;
+}
+
+.engagement-item .flip-card .accept {
+    z-index: 1;
+    transform: perspective(700px) rotateX(180deg);
+}
+
+.engagement-item .flip-card .reject {
+    z-index: 2;
+    transform: perspective(700px) rotateX(-180deg);
+}
+
+.engagement-item .flip-card .accept.activated {
+    background: #81ecec;
+    color: #ffffff;
+    transform: perspective(700px) rotateX(360deg);
+}
+
+.engagement-item .flip-card .reject.activated {
+    background: #ff7675;
+    color: #ffffff;
+    transform: perspective(700px) rotateX(-360deg);
+}
+
+.engagement-item .flip-card h2 {
+    font-size: 3em;
+    text-transform: uppercase;
+    transform: perspective(800px) translateZ(50px);
 }
