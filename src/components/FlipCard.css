@@ -1,0 +1,46 @@
+.card {
+    position: relative;
+    width: 300px;
+    height: 400px;
+    transform-style: preserve-3d;
+}
+
+.card .face {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden;
+    transition: 1s ease-in-out;
+    transform: perspective(500px) rotateX(0deg);
+}
+
+.card .face.accept {
+    background: #81ecec;
+    color: #ffffff;
+}
+
+.card:hover .face.accept {
+    transform: perspective(500px) rotateX(180deg);
+}
+
+.card .face.reject {
+    background: #ff7675;
+    color: #ffffff;
+    transform: perspective(500px) rotateX(180deg);
+}
+
+.card:hover .face.reject {
+    transform: perspective(500px) rotateX(360deg);
+}
+
+.card .face h2 {
+    font-size: 3em;
+    text-transform: uppercase;
+    transform: perspective(500px) translateZ(50px);
+}

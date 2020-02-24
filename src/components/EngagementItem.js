@@ -11,22 +11,25 @@ export class EngagementItem extends Component {
         this.state = {
             mounted: true
         };
+        this.handleUnmounting = this.handleUnmounting.bind(this);
         this.handleUnmountWithAcceptance = this.handleUnmountWithAcceptance.bind(this);
         this.handleUnmountWithRecejtion = this.handleUnmountWithRecejtion.bind(this);
     }
 
-    handleUnmountWithAcceptance() {
-        console.log("Accepted");
+    handleUnmounting() {
         this.setState((props, state) => ({
             mounted: false
         }));
     }
 
+    handleUnmountWithAcceptance() {
+        console.log("Accepted");
+        setTimeout(this.handleUnmounting, 1100);
+    }
+
     handleUnmountWithRecejtion() {
         console.log("Rejected");
-        this.setState((props, state) => ({
-            mounted: false
-        }));
+        setTimeout(this.handleUnmounting, 1100);
     }
 
     render = () => {
@@ -50,6 +53,12 @@ export class EngagementItem extends Component {
                             </EngagementButton>
                         </div>
                     </div>
+                    {/*<div className={"face accept"}>*/}
+                    {/*    <h2>accept</h2>*/}
+                    {/*</div>*/}
+                    {/*<div className={"face reject"}>*/}
+                    {/*    <h2>reject</h2>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         );
