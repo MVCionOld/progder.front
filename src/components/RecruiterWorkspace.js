@@ -11,10 +11,6 @@ const loremIpsumFull = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 
 class Card extends Component {
 
-    constructor(props) {
-        super(props);
-    }
-
     toggle() {
         let blur = document.getElementById("blur");
         blur.classList.toggle("active");
@@ -42,10 +38,6 @@ class Card extends Component {
 }
 
 class Popup extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     toggle(elem) {
         let blur = document.getElementById("blur");
@@ -93,17 +85,21 @@ const cardsProps = [
 
 export class RecruiterWorkspace extends Component {
     render() {
-        return <div className="recruiter-main-container">
-            <div className="container" id="blur">
-                {cardsProps.map(
-                    cardProps => <Card imgSrc={cardProps.imgSrc} dataText={cardProps.dataText}/>
-                )}
+        return (
+            <div className="recruiter-main-container">
+                <div className="container" id="blur">
+                    {cardsProps.map(
+                        cardProps => <Card
+                            imgSrc={cardProps.imgSrc}
+                            dataText={cardProps.dataText}/>
+                    )}
+                </div>
+                <div id="popup">
+                    {cardsProps.map(
+                        cardProps => <Popup dataText={cardProps.dataText}/>
+                    )}
+                </div>
             </div>
-            <div id="popup">
-                {cardsProps.map(
-                    cardProps => <Popup dataText={cardProps.dataText}/>
-                )}
-            </div>
-        </div>;
+        );
     }
 }
