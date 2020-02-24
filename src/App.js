@@ -6,7 +6,6 @@ import {CircularMenu} from "./components/CircularMenu";
 import {LoginForm} from "./components/LoginForm";
 import {SignupForm} from "./components/SignupForm";
 import {RoleSelection} from "./components/RoleSelection";
-import {FlipCard} from "./components/FlipCard";
 
 
 export class App extends React.Component {
@@ -17,8 +16,7 @@ export class App extends React.Component {
                 {/*<RoleSelection />*/}
                 <CandidateWorkspace/>
                 {/*<RecruiterWorkspace />*/}
-                <FlipCard/>
-                <CircularMenu/>
+                {/*<CircularMenu/>*/}
             </div>
         );
     }
