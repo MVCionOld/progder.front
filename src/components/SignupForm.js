@@ -102,7 +102,7 @@ export class SignupForm extends Component {
                             onChange={inputBoxProps.onChange}
                         />
                     })}
-                    <SubmitButton/>
+                    <SubmitButton value={"Submit"}/>
                 </form>
             </div>
         );
