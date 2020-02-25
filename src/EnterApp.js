@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {SignupForm} from "./components/SignupForm";
 import {LoginForm} from "./components/LoginForm";
 
 
-export class EnterApp extends React.Component {
+export class EnterApp extends Component {
 
     render() {
         const role = this.props.match.params.role;
@@ -15,5 +15,3 @@ export class EnterApp extends React.Component {
         );
     }
 }
-
-export default EnterApp;
