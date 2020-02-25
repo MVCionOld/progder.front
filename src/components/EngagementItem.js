@@ -27,7 +27,7 @@ export class EngagementItem extends Component {
         this.setState((props, state) => ({
             accepted: true
         }));
-        setTimeout(this.handleUnmounting, 1200);
+        setTimeout(this.handleUnmounting, 1400);
     }
 
     handleUnmountWithRecejtion() {
@@ -35,7 +35,7 @@ export class EngagementItem extends Component {
         this.setState((props, state) => ({
             accepted: false
         }));
-        setTimeout(this.handleUnmounting, 1200);
+        setTimeout(this.handleUnmounting, 1400);
     }
 
     render = () => {
