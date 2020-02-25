@@ -8,13 +8,22 @@ export class SignupForm extends Component {
 
     constructor(props) {
         super(props);
+        const role = this.props.role.toLowerCase();
         this.state = {
             usernameValue: '',
             nameValue: '',
             surnameValue: '',
             emailValue: '',
-            companyNameValue: '',
             passwordValue: '',
+            companyNameValue: '',
+            personalInfoShortenValue: '',
+            personalInfoExtendedValue: '',
+            skillsInfoShortenValue: '',
+            skillsInfoExtendedValue: '',
+            wishesInfoShortenValue: '',
+            wishesInfoExtendedValue: '',
+            extralInfoShortenValue: '',
+            extraInfoExtendedValue: '',
             formData: [
                 {
                     type: "text",
@@ -67,25 +76,120 @@ export class SignupForm extends Component {
                     label: "Password",
                     onChange: (event) => {
                         this.setState({
-                            emailValue: event.target.value
+                            passwordValue: event.target.value
                         })
                     }
                 },
             ],
         };
-        if (this.props.role.toLowerCase() === 'recruiter') {
-            this.state.formData.splice(4, 0, {
-                type: "text",
-                name: "",
-                required: "",
-                label: "Company",
-                onChange: (event) => {
-                    this.setState({
-                        companyNameValue: event.target.value
-                    })
+        const specifiedFields = {
+            'recruiter': [
+                {
+                    type: "text",
+                    name: "",
+                    required: "",
+                    label: "Company",
+                    onChange: (event) => {
+                        this.setState({
+                            companyNameValue: event.target.value
+                        })
+                    }
                 }
-            });
-        }
+            ],
+            'candidate': [
+                {
+                    type: "text",
+                    name: "",
+                    required: "",
+                    label: "Personal info",
+                    onChange: (event) => {
+                        this.setState({
+                            personalInfoShortenValue: event.target.value
+                        })
+                    }
+                },
+                {
+                    type: "text",
+                    name: "",
+                    required: "",
+                    label: "Personal info (extended)",
+                    onChange: (event) => {
+                        this.setState({
+                            personalInfoExtendedValue: event.target.value
+                        })
+                    }
+                },
+                {
+                    type: "text",
+                    name: "",
+                    required: "",
+                    label: "Skills info",
+                    onChange: (event) => {
+                        this.setState({
+                            skillsInfoShortenValue: event.target.value
+                        })
+                    }
+                },
+                {
+                    type: "text",
+                    name: "",
+                    required: "",
+                    label: "Skills info (extended)",
+                    onChange: (event) => {
+                        this.setState({
+                            skillsInfoExtendedValue: event.target.value
+                        })
+                    }
+                },
+                {
+                    type: "text",
+                    name: "",
+                    required: "",
+                    label: "Wishes info",
+                    onChange: (event) => {
+                        this.setState({
+                            wishesInfoShortenValue: event.target.value
+                        })
+                    }
+                },
+                {
+                    type: "text",
+                    name: "",
+                    required: "",
+                    label: "Wishes info (extended)",
+                    onChange: (event) => {
+                        this.setState({
+                            wishesInfoExtendedValue: event.target.value
+                        })
+                    }
+                },
+                {
+                    type: "text",
+                    name: "",
+                    required: "",
+                    label: "Extra info",
+                    onChange: (event) => {
+                        this.setState({
+                            extralInfoShortenValue: event.target.value
+                        })
+                    }
+                },
+                {
+                    type: "text",
+                    name: "",
+                    required: "",
+                    label: "Extra info (extended)",
+                    onChange: (event) => {
+                        this.setState({
+                            extralInfoExtendedValue: event.target.value
+                        })
+                    }
+                }
+            ]
+        };
+        specifiedFields[role].map(field =>
+            this.state.formData.splice(this.state.formData.length - 1, 0, field)
+        );
     }
 
     render() {
