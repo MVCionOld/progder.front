@@ -1,12 +1,11 @@
-import React, {Component} from "react";
+import React from "react";
 import './SubmitButton.css';
 
 
-export class SubmitButton extends Component {
-
-    render() {
-        return (
-            <input type="submit" name="" value={this.props.value}/>
-        );
-    }
-}
+export const SubmitButton = ({value, onClick}) => (
+    <input
+        type="submit"
+        name=""
+        value={value}
+        onClick={onClick}/>
+);

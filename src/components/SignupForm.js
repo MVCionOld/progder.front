@@ -8,6 +8,7 @@ export class SignupForm extends Component {
 
     constructor(props) {
         super(props);
+        this.submit = this.submit.bind(this);
         const role = this.props.role.toLowerCase();
         this.state = {
             usernameValue: '',
@@ -192,6 +193,10 @@ export class SignupForm extends Component {
         );
     }
 
+    submit = (e) => {
+        e.preventDefault();
+    };
+
     render() {
         return (
             <div className="box" id="signup">
@@ -206,7 +211,7 @@ export class SignupForm extends Component {
                             onChange={inputBoxProps.onChange}
                         />
                     })}
-                    <SubmitButton value={"Submit"}/>
+                    <SubmitButton value={"Submit"} onClick={this.submit}/>
                 </form>
             </div>
         );
