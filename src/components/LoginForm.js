@@ -40,7 +40,7 @@ export class LoginForm extends Component {
 
     render() {
         return (
-            <div className="box">
+            <div className="box" id="login">
                 <h2>Login as {this.props.role.toLowerCase()}</h2>
                 <form>
                     {this.state.formData.map((inputBoxProps => {

@@ -194,7 +194,7 @@ export class SignupForm extends Component {
 
     render() {
         return (
-            <div className="box">
+            <div className="box" id="signup">
                 <h2>Signup as {this.props.role.toLowerCase()}</h2>
                 <form>
                     {this.state.formData.map(inputBoxProps => {
