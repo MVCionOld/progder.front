@@ -8,6 +8,7 @@ export const InputBox = props => (
             type={props.type}
             name={props.name}
             required={props.required}
+            value={props.value}
             placeholder={""}
             onChange={props.onChange}/>
         <label>{props.label}</label>
