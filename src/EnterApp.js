@@ -10,7 +10,10 @@ export class EnterApp extends Component {
         const isSigningUp = this.props.match.params.action === 'signup';
         return (
             <div className="EnterApp">
-                {isSigningUp ? <SignupForm role={role}/> : <LoginForm role={role}/>}
+                {isSigningUp
+                    ? <SignupForm role={role}/>
+                    : <LoginForm role={role}/>
+                }
             </div>
         );
     }
