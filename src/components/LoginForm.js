@@ -8,7 +8,7 @@ export function LoginForm(props) {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    this.onSubmit = React.useCallback(async (e) => {
+    let onSubmit = React.useCallback(async (e) => {
         e.preventDefault();
         const data = JSON.stringify({
             username,
@@ -42,7 +42,7 @@ export function LoginForm(props) {
 
     return (
         <div className="box" id="login">
-            <h2>Login as {this.props.role.toLowerCase()}</h2>
+            <h2>Login as {props.role.toLowerCase()}</h2>
             <form>
                 {formData.map((inputBoxProps => {
                     return <InputBox
@@ -53,7 +53,7 @@ export function LoginForm(props) {
                         onChange={inputBoxProps.onChange}
                     />
                 }))}
-                <SubmitButton value={"Submit"} onClick={this.onSubmit}/>
+                <SubmitButton value={"Submit"} onClick={onSubmit}/>
             </form>
         </div>
     );

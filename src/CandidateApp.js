@@ -9,7 +9,7 @@ export class CandidateApp extends Component {
         return (
             <div className="CandidateApp">
                 <CandidateWorkspace/>
-                <CircularMenu/>
+                <CircularMenu role={"candidate"}/>
             </div>
         );
     }

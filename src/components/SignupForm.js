@@ -4,9 +4,9 @@ import {InputBox} from "./InputBox";
 import {SubmitButton} from "./SubmitButton";
 
 
-export function RecruiterSignupForm(props) {
+function RecruiterSignupForm(props) {
 
-    const role = this.props.role.toLowerCase();
+    const role = props.role.toLowerCase();
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -14,7 +14,7 @@ export function RecruiterSignupForm(props) {
     const [company, setCompany] = useState('');
     const [password, setPassword] = useState('');
 
-    this.onSubmit = React.useCallback(async (e) => {
+    let onSubmit = React.useCallback(async (e) => {
         e.preventDefault();
         const data = JSON.stringify({
             username, name, surname, email, company, password
@@ -86,16 +86,16 @@ export function RecruiterSignupForm(props) {
                         onChange={inputBoxProps.onChange}
                     />
                 ))}
-                <SubmitButton value={"Submit"} onClick={null}/>
+                <SubmitButton value={"Submit"} onClick={onSubmit}/>
             </form>
         </div>
     );
 }
 
 
-export function CandidateSignupForm(props) {
+function CandidateSignupForm(props) {
 
-    const role = this.props.role.toLowerCase();
+    const role = props.role.toLowerCase();
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -110,7 +110,7 @@ export function CandidateSignupForm(props) {
     const [extraInfoExtended, setExtraInfoExtended] = useState('');
     const [password, setPassword] = useState('');
 
-    this.onSubmit = React.useCallback(async (e) => {
+    let onSubmit = React.useCallback(async (e) => {
         e.preventDefault();
         const data = JSON.stringify({
             username, name, surname, email,
@@ -236,8 +236,15 @@ export function CandidateSignupForm(props) {
                         onChange={inputBoxProps.onChange}
                     />
                 ))}
-                <SubmitButton value={"Submit"} onClick={this.onSubmit}/>
+                <SubmitButton value={"Submit"} onClick={onSubmit}/>
             </form>
         </div>
     );
+}
+
+export function SignupForm(props) {
+    const role = props.role.toLowerCase();
+    return role === 'recruiter'
+        ? <RecruiterSignupForm role={role}/>
+        : <CandidateSignupForm role={role}/>;
 }
