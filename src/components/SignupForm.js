@@ -1,219 +1,243 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import "./LoginSignupForm.css";
 import {InputBox} from "./InputBox";
 import {SubmitButton} from "./SubmitButton";
 
 
-export class SignupForm extends Component {
+export function RecruiterSignupForm(props) {
 
-    constructor(props) {
-        super(props);
-        this.submit = this.submit.bind(this);
-        const role = this.props.role.toLowerCase();
-        this.state = {
-            usernameValue: '',
-            nameValue: '',
-            surnameValue: '',
-            emailValue: '',
-            passwordValue: '',
-            companyNameValue: '',
-            personalInfoShortenValue: '',
-            personalInfoExtendedValue: '',
-            skillsInfoShortenValue: '',
-            skillsInfoExtendedValue: '',
-            wishesInfoShortenValue: '',
-            wishesInfoExtendedValue: '',
-            extralInfoShortenValue: '',
-            extraInfoExtendedValue: '',
-            formData: [
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Username",
-                    onChange: (event) => {
-                        this.setState({
-                            usernameValue: event.target.value
-                        })
-                    }
-                },
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Name",
-                    onChange: (event) => {
-                        this.setState({
-                            nameValue: event.target.value
-                        })
-                    }
-                },
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Surname",
-                    onChange: (event) => {
-                        this.setState({
-                            surnameValue: event.target.value
-                        })
-                    }
-                },
-                {
-                    type: "email",
-                    name: "",
-                    required: "",
-                    label: "Email",
-                    onChange: (event) => {
-                        this.setState({
-                            emailValue: event.target.value
-                        })
-                    }
-                },
-                {
-                    type: "password",
-                    name: "",
-                    required: "",
-                    label: "Password",
-                    onChange: (event) => {
-                        this.setState({
-                            passwordValue: event.target.value
-                        })
-                    }
-                },
-            ],
-        };
-        const specifiedFields = {
-            'recruiter': [
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Company",
-                    onChange: (event) => {
-                        this.setState({
-                            companyNameValue: event.target.value
-                        })
-                    }
-                }
-            ],
-            'candidate': [
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Personal info",
-                    onChange: (event) => {
-                        this.setState({
-                            personalInfoShortenValue: event.target.value
-                        })
-                    }
-                },
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Personal info (extended)",
-                    onChange: (event) => {
-                        this.setState({
-                            personalInfoExtendedValue: event.target.value
-                        })
-                    }
-                },
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Skills info",
-                    onChange: (event) => {
-                        this.setState({
-                            skillsInfoShortenValue: event.target.value
-                        })
-                    }
-                },
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Skills info (extended)",
-                    onChange: (event) => {
-                        this.setState({
-                            skillsInfoExtendedValue: event.target.value
-                        })
-                    }
-                },
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Wishes info",
-                    onChange: (event) => {
-                        this.setState({
-                            wishesInfoShortenValue: event.target.value
-                        })
-                    }
-                },
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Wishes info (extended)",
-                    onChange: (event) => {
-                        this.setState({
-                            wishesInfoExtendedValue: event.target.value
-                        })
-                    }
-                },
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Extra info",
-                    onChange: (event) => {
-                        this.setState({
-                            extralInfoShortenValue: event.target.value
-                        })
-                    }
-                },
-                {
-                    type: "text",
-                    name: "",
-                    required: "",
-                    label: "Extra info (extended)",
-                    onChange: (event) => {
-                        this.setState({
-                            extralInfoExtendedValue: event.target.value
-                        })
-                    }
-                }
-            ]
-        };
-        specifiedFields[role].map(field =>
-            this.state.formData.splice(this.state.formData.length - 1, 0, field)
-        );
-    }
+    const role = this.props.role.toLowerCase();
+    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [email, setEmail] = useState('');
+    const [company, setCompany] = useState('');
+    const [password, setPassword] = useState('');
 
-    submit = (e) => {
+    this.onSubmit = React.useCallback(async (e) => {
         e.preventDefault();
-    };
+        const data = JSON.stringify({
+            username, name, surname, email, company, password
+        });
+        await fetch("http://localhost:8000/api/users/", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: data
+        })
+    }, [username, name, surname, email, company, password]);
 
-    render() {
-        return (
-            <div className="box" id="signup">
-                <h2>Signup as {this.props.role.toLowerCase()}</h2>
-                <form>
-                    {this.state.formData.map(inputBoxProps => {
-                        return <InputBox
-                            type={inputBoxProps.type}
-                            name={inputBoxProps.name}
-                            label={inputBoxProps.label}
-                            required={inputBoxProps.required}
-                            onChange={inputBoxProps.onChange}
-                        />
-                    })}
-                    <SubmitButton value={"Submit"} onClick={this.submit}/>
-                </form>
-            </div>
-        );
-    }
+    const formData = [
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Username",
+            onChange: (e) => setUsername(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Name",
+            onChange: (e) => setName(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Surname",
+            onChange: (e) => setSurname(e.target.value)
+        },
+        {
+            type: "email",
+            name: "",
+            required: "",
+            label: "Email",
+            onChange: (e) => setEmail(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Company",
+            onChange: (e) => setCompany(e.target.value)
+        },
+        {
+            type: "password",
+            name: "",
+            required: "",
+            label: "Password",
+            onChange: (e) => setPassword(e.target.value)
+        },
+    ];
+
+    return (
+        <div className="box" id="signup">
+            <h2>Signup as {role}</h2>
+            <form>
+                {formData.map(inputBoxProps => (
+                    <InputBox
+                        type={inputBoxProps.type}
+                        name={inputBoxProps.name}
+                        label={inputBoxProps.label}
+                        required={inputBoxProps.required}
+                        onChange={inputBoxProps.onChange}
+                    />
+                ))}
+                <SubmitButton value={"Submit"} onClick={null}/>
+            </form>
+        </div>
+    );
+}
+
+
+export function CandidateSignupForm(props) {
+
+    const role = this.props.role.toLowerCase();
+    const [username, setUsername] = useState('');
+    const [name, setName] = useState('');
+    const [surname, setSurname] = useState('');
+    const [email, setEmail] = useState('');
+    const [personalInfo, setPersonalInfo] = useState('');
+    const [personalInfoExtended, setPersonalInfoExtended] = useState('');
+    const [skillsInfo, setSkillsInfo] = useState('');
+    const [skillsInfoExtended, setSkillsInfoExtended] = useState('');
+    const [wishesInfo, setWishesInfo] = useState('');
+    const [wishesInfoExtended, setWishesInfoExtended] = useState('');
+    const [extraInfo, setExtraInfo] = useState('');
+    const [extraInfoExtended, setExtraInfoExtended] = useState('');
+    const [password, setPassword] = useState('');
+
+    this.onSubmit = React.useCallback(async (e) => {
+        e.preventDefault();
+        const data = JSON.stringify({
+            username, name, surname, email,
+            personalInfo, personalInfoExtended, skillsInfo, skillsInfoExtended, wishesInfo, wishesInfoExtended,
+            extraInfo, extraInfoExtended, password
+        });
+        await fetch("http://localhost:8000/api/users/", {
+            method: "post",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: data
+        })
+    }, [username, name, surname, email,
+        personalInfo, personalInfoExtended, skillsInfo, skillsInfoExtended, wishesInfo, wishesInfoExtended,
+        extraInfo, extraInfoExtended, password]);
+
+    const formData = [
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Username",
+            onChange: (e) => setUsername(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Name",
+            onChange: (e) => setName(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Surname",
+            onChange: (e) => setSurname(e.target.value)
+        },
+        {
+            type: "email",
+            name: "",
+            required: "",
+            label: "Email",
+            onChange: (e) => setEmail(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Personal info",
+            onChange: (e) => setPersonalInfo(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Personal info (extended)",
+            onChange: (e) => setPersonalInfoExtended(e.target.value)
+        },
+
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Skills info",
+            onChange: (e) => setSkillsInfo(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Skills info (extended)",
+            onChange: (e) => setSkillsInfoExtended(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Wishes info",
+            onChange: (e) => setWishesInfo(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Wishes info (extended)",
+            onChange: (e) => setWishesInfoExtended(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Extra info",
+            onChange: (e) => setExtraInfo(e.target.value)
+        },
+        {
+            type: "text",
+            name: "",
+            required: "",
+            label: "Extra info (extended)",
+            onChange: (e) => setExtraInfoExtended(e.target.value)
+        },
+        {
+            type: "password",
+            name: "",
+            required: "",
+            label: "Password",
+            onChange: (e) => setPassword(e.target.value)
+        },
+    ];
+
+    return (
+        <div className="box" id="signup">
+            <h2>Signup as {role}</h2>
+            <form>
+                {formData.map(inputBoxProps => (
+                    <InputBox
+                        type={inputBoxProps.type}
+                        name={inputBoxProps.name}
+                        label={inputBoxProps.label}
+                        required={inputBoxProps.required}
+                        onChange={inputBoxProps.onChange}
+                    />
+                ))}
+                <SubmitButton value={"Submit"} onClick={this.onSubmit}/>
+            </form>
+        </div>
+    );
 }
