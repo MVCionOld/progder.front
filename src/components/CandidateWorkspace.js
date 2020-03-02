@@ -63,7 +63,8 @@ export class CandidateWorkspace extends Component {
                     {engagemenentsItems.map(
                         engagemenentItem => <EngagementItem
                             recruiterLogin={engagemenentItem.recruiterLogin}
-                            companyName={engagemenentItem.companyName}/>
+                            companyName={engagemenentItem.companyName}
+                        />
                     )}
                 </div>
             </div>

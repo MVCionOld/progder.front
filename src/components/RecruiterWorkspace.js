@@ -27,7 +27,7 @@ class Card extends Component {
                 <div className="content">
                     <div>
                         <h3>{this.props.dataText}</h3>
-                        <p>{loremIpsum}</p>
+                        <p>{this.props.children}</p>
                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                         <a href="#" onClick={this.toggle.bind(this)}>Read more</a>
                     </div>
@@ -57,7 +57,7 @@ class Popup extends Component {
         return (
             <div id={this.props.dataText}>
                 <h2>{this.props.dataText}</h2>
-                <p>{loremIpsumFull}</p>
+                <p>{this.props.children}</p>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
                 <a href="#" onClick={this.toggle.bind(this)}>Close</a>
             </div>
@@ -86,6 +86,20 @@ const cardsProps = [
 
 
 export class RecruiterWorkspace extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {};
+    }
+
+    invite() {
+
+    }
+
+    ignore() {
+
+    }
+
     render() {
         return (
             <div className="recruiter-main-container">
@@ -93,12 +107,17 @@ export class RecruiterWorkspace extends Component {
                     {cardsProps.map(
                         cardProps => <Card
                             imgSrc={cardProps.imgSrc}
-                            dataText={cardProps.dataText}/>
+                            dataText={cardProps.dataText}>
+                            {loremIpsum}
+                        </Card>
                     )}
                 </div>
                 <div id="popup">
                     {cardsProps.map(
-                        cardProps => <Popup dataText={cardProps.dataText}/>
+                        cardProps => <Popup
+                            dataText={cardProps.dataText}>
+                            {loremIpsumFull}
+                        </Popup>
                     )}
                 </div>
             </div>
