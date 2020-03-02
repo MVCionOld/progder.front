@@ -67,20 +67,20 @@ class Popup extends Component {
 
 const cardsProps = [
     {
-        dataText: "Design",
-        imgSrc: "/design.png"
+        dataText: "General",
+        imgSrc: "/general.png"
     },
     {
-        dataText: "Code",
-        imgSrc: "/code.png"
+        dataText: "Skills",
+        imgSrc: "/skills.png"
     },
     {
-        dataText: "Launch",
-        imgSrc: "/launch.png"
+        dataText: "Extra",
+        imgSrc: "/extra.png"
     },
     {
-        dataText: "Earn",
-        imgSrc: "/earn.png"
+        dataText: "Wishes",
+        imgSrc: "/wishes.png"
     }
 ];
 
