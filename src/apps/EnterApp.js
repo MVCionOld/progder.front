@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {SignupForm} from "./components/SignupForm";
-import {LoginForm} from "./components/LoginForm";
+import {SignupForm} from "../components/forms/SignupForm";
+import {LoginForm} from "../components/forms/LoginForm";
 
 
 export class EnterApp extends Component {

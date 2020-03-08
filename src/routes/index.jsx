@@ -1,9 +1,9 @@
 import {Route, Switch, withRouter} from 'react-router';
-import {EnterApp} from "../EnterApp";
+import {EnterApp} from "../apps/EnterApp";
 import React from "react";
-import {EnterMenu, RoleMenu} from "../components/SelectionMenu";
-import {CandidateApp} from "../CandidateApp";
-import {RecruiterApp} from "../RecruiterApp";
+import {EnterMenu, RoleMenu} from "../components/selectionmenu/SelectionMenu";
+import {CandidateApp} from "../apps/CandidateApp";
+import {RecruiterApp} from "../apps/RecruiterApp";
 
 
 const MainRouter = () => {

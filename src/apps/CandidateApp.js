@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
-import {CandidateWorkspace} from "./components/CandidateWorkspace";
-import {CircularMenu} from "./components/CircularMenu";
+import {CandidateWorkspace} from "../components/candidateworkspace/CandidateWorkspace";
+import {CircularMenu} from "../components/circularmenu/CircularMenu";
 
 
 export class CandidateApp extends Component {
