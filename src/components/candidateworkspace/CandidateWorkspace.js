@@ -56,11 +56,20 @@ const engagemenentsItems = [
 
 
 export class CandidateWorkspace extends Component {
+
+    constructor(props) {
+        super(props);
+        this.invites = [];
+    }
+
     render() {
+        if (this.invites.length === 0) {
+            return <h1>NO NEW INVITES</h1>;
+        }
         return (
             <div className={"candidate-main-container"}>
                 <div className={"container"}>
-                    {engagemenentsItems.map(
+                    {this.invites.map(
                         engagemenentItem => <EngagementItem
                             recruiterLogin={engagemenentItem.recruiterLogin}
                             companyName={engagemenentItem.companyName}
