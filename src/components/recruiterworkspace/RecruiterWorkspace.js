@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import "./RecruiterWorkspace.css";
 import {Card} from './Card';
 import {Popup} from './Popup';
+import {RecruiterButton} from "./RecruiterButton";
 
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\n" +
@@ -38,6 +39,8 @@ export class RecruiterWorkspace extends Component {
     constructor(props) {
         super(props);
         this.state = {};
+        this.invite = this.invite.bind(this);
+        this.ignore = this.ignore.bind(this);
     }
 
     invite() {
@@ -59,6 +62,12 @@ export class RecruiterWorkspace extends Component {
                             {loremIpsum}
                         </Card>
                     )}
+                    <div className={"button"}>
+                        <RecruiterButton type={"ignore"} onClick={this.ignore}>Ignore</RecruiterButton>
+                    </div>
+                    <div className={"button"}>
+                        <RecruiterButton type={"invite"} onClick={this.invite}>Invite</RecruiterButton>
+                    </div>
                 </div>
                 <div id="popup">
                     {cardsProps.map(

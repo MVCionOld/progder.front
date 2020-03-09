@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900&display=swap');
+
+
+.recruiter-button {
+    position: relative;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%, -10%);
+    width: 125px;
+    height: 125px;
+    border-radius: 100%;
+    background-color: #3d3d3d;
+    outline: none;
+}
+
+.button-ignore,
+.button-invite {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.button-ignore:hover h1 {
+    color: #ff0057;
+}
+
+.button-invite:hover h1 {
+    color: #81ecec;
+}
+
