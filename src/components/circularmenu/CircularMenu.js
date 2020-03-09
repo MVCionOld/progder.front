@@ -15,7 +15,8 @@ const CircularMenuButton = (props) => {
         "circular-menu__button": true,
         "circular-menu__button_active": active
     });
-    let onClick = () => {
+    let onClick = (e) => {
+        e.preventDefault();
         props.onClick();
         setActive(!active);
     };
