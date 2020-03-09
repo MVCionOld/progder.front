@@ -64,7 +64,7 @@ export class CandidateWorkspace extends Component {
 
     render() {
         if (this.invites.length === 0) {
-            return <h1>NO NEW INVITES</h1>;
+            return <h1 className={"candidate-msg"}>NO NEW INVITES</h1>;
         }
         return (
             <div className={"candidate-main-container"}>
