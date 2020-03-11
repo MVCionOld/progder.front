@@ -21,11 +21,15 @@
     transform: translate(-50%, -50%);
 }
 
-.button-ignore:hover h1 {
+.recruiter-button:hover {
+    cursor: pointer;
+}
+
+.recruiter-button:hover .button-ignore h1 {
     color: #ff0057;
 }
 
-.button-invite:hover h1 {
+.recruiter-button:hover .button-invite h1 {
     color: #81ecec;
 }
 
