@@ -1,4 +1,5 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
+import testReducer from "./test";
 
 
 const logger = store => next => action => {
@@ -18,13 +19,15 @@ const saver = store => next => action => {
 };
 
 const initStorage = (initalState={}) => {
-    return localStorage['progder-storage'] || initalState;
+    return localStorage['progder-storage']
+        ? localStorage['progder-storage']
+        : initalState;
 };
 
 export const storeFactory = (initialState={}) => (
     applyMiddleware(logger, saver)(createStore)(
         combineReducers({
-            test,
+            test: testReducer,
         }), initStorage(initialState)
     )
 );
