@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import "./RecruiterWorkspace.css";
+import "./Popup.css";
 
 
 export class Popup extends Component {

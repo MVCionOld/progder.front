@@ -39,17 +39,15 @@ export class RecruiterWorkspace extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.invite = this.invite.bind(this);
-        this.ignore = this.ignore.bind(this);
     }
 
-    invite() {
+    invite = () => {
 
-    }
+    };
 
-    ignore() {
+    ignore = () => {
 
-    }
+    };
 
     render() {
         return (
