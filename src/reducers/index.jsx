@@ -4,10 +4,10 @@ import testReducer from "./test";
 
 const logger = store => next => action => {
     console.groupCollapsed("dispatching", action.type);
-    console.log('prev state: ', store.getState());
-    console.log('action: ', action);
+    console.log('prev state', store.getState());
+    console.log('action', action);
     let result = next(action);
-    console.log('next state: ', store.getState());
+    console.log('next state', store.getState());
     console.groupEnd();
     return result;
 };
