@@ -3,11 +3,15 @@ import classNames from 'classnames';
 import './CircularMenu.css';
 
 
-const CircularMenuItem = (props) => (
-    <a href={props.href} className="circular-menu__item">
+const CircularMenuItem = (props) => {
+    const style = {
+        top: props.top,
+        left: props.left
+    };
+    return (<a href={props.href} className="circular-menu__item" style={style}>
         {props.text}
-    </a>
-);
+    </a>);
+};
 
 const CircularMenuButton = (props) => {
     const [active, setActive] = useState(false);
@@ -34,62 +38,62 @@ export class CircularMenu extends Component {
         super(props);
         const role = this.props.role.toLowerCase();
         this.state = {
+            radius: 60,
             pending: false,
             actions: [
                 {
+                    "id": 0,
                     "name": "Exit",
                     "href": "/"
                 },
                 {
+                    "id": 1,
                     "name": "Logout",
                     "href": `/${role}/login`
                 },
                 {
+                    "id": 2,
                     "name": "---",
                     "href": "#"
                 },
                 {
+                    "id": 3,
                     "name": "---",
                     "href": "#"
                 }
             ]
-        }
+        };
+        this.state.menuItemsAmount = this.state.actions.length;
+        this.state.arc = Math.PI / 2 / (this.state.menuItemsAmount - 1);
     }
 
+    calcMenuItemStyleLeft = (i) => {
+        const angle = i * this.state.arc - Math.PI;
+        const x = this.state.pending ? this.state.radius * Math.cos(angle) : 0;
+        return `${50 + x}%`;
+    };
+
+    calcMenuItemStyleTop = (i) => {
+        const angle = i * this.state.arc - Math.PI;
+        const y = this.state.pending ? this.state.radius * Math.sin(angle) : 0;
+        return `${50 + y}%`;
+    };
+
     render() {
-
-        const onClick = () => {
-            let items = document.querySelectorAll('.circular-menu__item');
-            const menuItemsAmount = items.length;
-            const arc = Math.PI / 2 / (menuItemsAmount - 1);
-            const radius = 60;
-            if (!this.state.pending) {
-                for (let i = 0; i < menuItemsAmount; ++i) {
-                    const angle = i * arc - Math.PI;
-                    const x = radius * Math.cos(angle);
-                    const y = radius * Math.sin(angle);
-                    items[i].style.left = 50 + x + '%';
-                    items[i].style.top = 50 + y + '%';
-                }
-            } else {
-                for (let item of items) {
-                    item.removeAttribute('style');
-                }
-            }
-            this.setState({
-                pending: !this.state.pending
-            });
-        };
-
         return (
             <div className="circular-menu">
                 {this.state.actions.map(
                     action => <CircularMenuItem
+                        key={action.id}
                         href={action.href}
                         text={action.name}
+                        left={this.calcMenuItemStyleLeft(action.id)}
+                        top={this.calcMenuItemStyleTop(action.id)}
                     />
                 )}
-                <CircularMenuButton onClick={onClick}/>
+                <CircularMenuButton onClick={
+                    () => this.setState({pending: !this.state.pending})
+                }/>
             </div>
         )
     }
