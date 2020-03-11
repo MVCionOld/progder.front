@@ -96,7 +96,8 @@
     font-size: 24px;
 }
 
-.container .card .content a, #popup div a {
+.container .card .content a,
+#popup div a {
     display: inline-block;
     margin-top: 10px;
     padding: 5px 10px;
