@@ -43,11 +43,11 @@ export class RecruiterWorkspace extends Component {
     }
 
     invite = () => {
-
+        console.log(this.props);
     };
 
     ignore = () => {
-
+        console.log(this.props);
     };
 
     render() {
@@ -86,5 +86,5 @@ export class RecruiterWorkspace extends Component {
 }
 
 export default connect(
-    state => ({recruiterWorkspace: state.recruiterWorkspace})
+    state => ({blurProps: state})
 )(RecruiterWorkspace);

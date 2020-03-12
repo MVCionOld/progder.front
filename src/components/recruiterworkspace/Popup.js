@@ -1,10 +1,20 @@
 import React, {Component} from "react";
+import {connect} from "react-redux";
+import {hidePopup} from "../../actions";
 import "./Popup.css";
 
 
 export class Popup extends Component {
 
-    toggle() {
+    constructor(props) {
+        super(props);
+        this.state = {
+            dataText: this.props.dataText
+        }
+    }
+
+    toggle = () => {
+        this.props.hideCardBlur(this.props.dataText);
         let blur = document.getElementById("blur");
         blur.classList.toggle("active");
         let popup = (() => {
@@ -16,7 +26,7 @@ export class Popup extends Component {
         if (popup !== null) {
             popup.classList.toggle("active");
         }
-    }
+    };
 
     render() {
         return (
@@ -24,8 +34,17 @@ export class Popup extends Component {
                 <h2>{this.props.dataText}</h2>
                 <p>{this.props.children}</p>
                 {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                <a href="#" onClick={this.toggle.bind(this)}>Close</a>
+                <a href="#" onClick={this.toggle}>Close</a>
             </div>
         );
     }
 }
+
+export default connect(
+    state => ({blurProps: state}),
+    dispatch => ({
+        hideCardBlur(dataText) {
+            dispatch(hidePopup(dataText));
+        }
+    })
+)(Popup);

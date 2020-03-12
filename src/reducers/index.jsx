@@ -1,4 +1,4 @@
-import {createStore, combineReducers, applyMiddleware} from "redux";
+import {applyMiddleware, combineReducers, createStore} from "redux";
 import popupReducer from "./popup";
 
 
@@ -13,15 +13,11 @@ const logger = store => next => action => {
 };
 
 const saver = store => next => action => {
-    let result = next(action);
-    localStorage['progder-storage'] = JSON.stringify(store.getState());
-    return result;
+    return next(action);
 };
 
 const initStorage = (initalState={}) => {
-    return localStorage['progder-storage']
-        ? localStorage['progder-storage']
-        : initalState;
+    return initalState;
 };
 
 export const storeFactory = (initialState={}) => (

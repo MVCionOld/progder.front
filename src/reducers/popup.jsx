@@ -1,7 +1,10 @@
 import {HIDE_POPUP, SHOW_POPUP} from "../constants";
 
 
-const initialState = {};
+const initialState = {
+    cardType: "unknown",
+    blur: false
+};
 
 const popupReducer = (state = initialState, action) => {
     switch (action.type) {

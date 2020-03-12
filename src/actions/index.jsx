@@ -1,18 +1,18 @@
 import {SHOW_POPUP, HIDE_POPUP} from "../constants";
 
 
-export const hidePopup = data => ({
+export const hidePopup = cardType => ({
     type: HIDE_POPUP,
     payload: {
-        data: data,
+        cardType: cardType,
         blur: false
     }
 });
 
-export const showPopup = data => ({
+export const showPopup = cardType => ({
     type: SHOW_POPUP,
     payload: {
-        data: data,
+        cardType: cardType,
         blur: true
     }
 });
