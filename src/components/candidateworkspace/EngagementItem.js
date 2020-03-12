@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-import './EngagementItem.css';
 import {EngagementButton} from "./EngagementButton";
+import './EngagementItem.css';
 
 
 export class EngagementItem extends Component {
@@ -11,32 +11,29 @@ export class EngagementItem extends Component {
             mounted: true,
             accepted: null
         };
-        this.handleUnmounting = this.handleUnmounting.bind(this);
-        this.handleUnmountWithAcceptance = this.handleUnmountWithAcceptance.bind(this);
-        this.handleUnmountWithRecejtion = this.handleUnmountWithRecejtion.bind(this);
     }
 
-    handleUnmounting() {
-        this.setState((props, state) => ({
+    handleUnmounting = () => {
+        this.setState(() => ({
             mounted: false
         }));
-    }
+    };
 
-    handleUnmountWithAcceptance() {
+    handleUnmountWithAcceptance = () => {
         console.log("Accepted");
-        this.setState((props, state) => ({
+        this.setState(() => ({
             accepted: true
         }));
         setTimeout(this.handleUnmounting, 1400);
-    }
+    };
 
-    handleUnmountWithRecejtion() {
+    handleUnmountWithRecejtion = () => {
         console.log("Rejected");
-        this.setState((props, state) => ({
+        this.setState(() => ({
             accepted: false
         }));
         setTimeout(this.handleUnmounting, 1400);
-    }
+    };
 
     render = () => {
         const flipCardAcceptClass = this.state.accepted === true
@@ -66,14 +63,14 @@ export class EngagementItem extends Component {
                     <p>Company:<br/>{this.props.companyName}</p>
                     <div className="btns">
                         <EngagementButton
-                            type={"accept-btn"}
-                            onClick={this.handleUnmountWithAcceptance}>
-                            Accept
-                        </EngagementButton>
-                        <EngagementButton
                             type={"reject-btn"}
                             onClick={this.handleUnmountWithRecejtion}>
                             Reject
+                        </EngagementButton>
+                        <EngagementButton
+                            type={"accept-btn"}
+                            onClick={this.handleUnmountWithAcceptance}>
+                            Accept
                         </EngagementButton>
                     </div>
                 </div>
