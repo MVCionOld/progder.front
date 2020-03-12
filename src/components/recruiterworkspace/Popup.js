@@ -13,7 +13,8 @@ export class Popup extends Component {
         }
     }
 
-    toggle = () => {
+    toggle = (e) => {
+        e.preventDefault();
         this.props.hideCardBlur(this.props.dataText);
         let blur = document.getElementById("blur");
         blur.classList.toggle("active");

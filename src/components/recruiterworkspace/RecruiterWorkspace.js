@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from "react-redux";
+import classNames from 'classnames';
 import Card from './Card';
 import Popup from './Popup';
 import {RecruiterButton} from "./RecruiterButton";
@@ -51,9 +52,19 @@ export class RecruiterWorkspace extends Component {
     };
 
     render() {
+        const blurStyleClass = classNames({
+            "container": true,
+            "active": this.props.blurProps.popupReducer.blur
+        });
+        const popupStyleClass = (dataText) => {
+            console.log(dataText, this.props.blurProps.popupReducer.cardType);
+            return classNames({
+                "active": this.props.blurProps.popupReducer.blur && dataText === this.props.blurProps.popupReducer.cardType
+            });
+        };
         return (
             <div className="recruiter-main-container">
-                <div className="container" id="blur">
+                <div className={"container"} id="blur">
                     {cardsProps.map(
                         cardProps => <Card
                             imgSrc={cardProps.imgSrc}
