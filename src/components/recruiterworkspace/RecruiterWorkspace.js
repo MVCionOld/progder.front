@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
-import "./RecruiterWorkspace.css";
-import {Card} from './Card';
-import {Popup} from './Popup';
+import {connect} from "react-redux";
+import Card from './Card';
+import Popup from './Popup';
 import {RecruiterButton} from "./RecruiterButton";
+import "./RecruiterWorkspace.css";
 
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\n" +
@@ -61,10 +62,14 @@ export class RecruiterWorkspace extends Component {
                         </Card>
                     )}
                     <div className={"button"}>
-                        <RecruiterButton type={"ignore"} onClick={this.ignore}>Ignore</RecruiterButton>
+                        <RecruiterButton type={"ignore"} onClick={this.ignore}>
+                            Ignore
+                        </RecruiterButton>
                     </div>
                     <div className={"button"}>
-                        <RecruiterButton type={"invite"} onClick={this.invite}>Invite</RecruiterButton>
+                        <RecruiterButton type={"invite"} onClick={this.invite}>
+                            Invite
+                        </RecruiterButton>
                     </div>
                 </div>
                 <div id="popup">
@@ -79,3 +84,7 @@ export class RecruiterWorkspace extends Component {
         );
     }
 }
+
+export default connect(
+    state => ({recruiterWorkspace: state.recruiterWorkspace})
+)(RecruiterWorkspace);
