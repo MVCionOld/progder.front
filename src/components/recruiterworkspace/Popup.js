@@ -17,18 +17,6 @@ export class Popup extends Component {
     toggle = (e) => {
         e.preventDefault();
         this.props.hideCardBlur(this.props.dataText);
-
-        let blur = document.getElementById("blur");
-        blur.classList.toggle("active");
-        let popup = (() => {
-            const popupElem = document.getElementById('popup');
-            return popupElem === null
-                ? null
-                : popupElem.getElementsByClassName('active')[0];
-        })();
-        if (popup !== null) {
-            popup.classList.toggle("active");
-        }
     };
 
     render() {
