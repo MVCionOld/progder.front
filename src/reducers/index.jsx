@@ -1,5 +1,5 @@
 import {createStore, combineReducers, applyMiddleware} from "redux";
-import testReducer from "./test";
+import popupReducer from "./popup";
 
 
 const logger = store => next => action => {
@@ -27,7 +27,7 @@ const initStorage = (initalState={}) => {
 export const storeFactory = (initialState={}) => (
     applyMiddleware(logger, saver)(createStore)(
         combineReducers({
-            test: testReducer,
+            popupReducer,
         }), initStorage(initialState)
     )
 );
