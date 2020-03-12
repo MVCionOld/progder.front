@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {RecruiterWorkspace} from "../components/recruiterworkspace/RecruiterWorkspace";
+import RecruiterWorkspace from "../components/recruiterworkspace/RecruiterWorkspace";
 import {CircularMenu} from "../components/circularmenu/CircularMenu";
 
 
