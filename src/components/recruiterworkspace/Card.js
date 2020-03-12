@@ -15,6 +15,7 @@ export class Card extends Component {
     toggle = (e) => {
         e.preventDefault();
         this.props.showCardBlur(this.props.dataText);
+
         let blur = document.getElementById("blur");
         blur.classList.toggle("active");
         let popup = document.getElementById(this.props.dataText);

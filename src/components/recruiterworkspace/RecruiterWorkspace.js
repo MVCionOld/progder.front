@@ -56,15 +56,13 @@ export class RecruiterWorkspace extends Component {
             "container": true,
             "active": this.props.blurProps.popupReducer.blur
         });
-        const popupStyleClass = (dataText) => {
-            console.log(dataText, this.props.blurProps.popupReducer.cardType);
-            return classNames({
-                "active": this.props.blurProps.popupReducer.blur && dataText === this.props.blurProps.popupReducer.cardType
-            });
+        const isPopupStyleClass = (dataText) => {
+            return this.props.blurProps.popupReducer.blur
+                && dataText === this.props.blurProps.popupReducer.cardType
         };
         return (
             <div className="recruiter-main-container">
-                <div className={"container"} id="blur">
+                <div className={blurStyleClass} id="blur">
                     {cardsProps.map(
                         cardProps => <Card
                             imgSrc={cardProps.imgSrc}
@@ -86,6 +84,7 @@ export class RecruiterWorkspace extends Component {
                 <div id="popup">
                     {cardsProps.map(
                         cardProps => <Popup
+                            popup={isPopupStyleClass(cardProps.dataText)}
                             dataText={cardProps.dataText}>
                             {loremIpsumFull}
                         </Popup>
