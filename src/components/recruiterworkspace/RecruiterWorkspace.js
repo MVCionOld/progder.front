@@ -18,18 +18,22 @@ const loremIpsumFull = "Lorem ipsum dolor sit amet, consectetur adipiscing elit,
 
 const cardsProps = [
     {
+        id: 0,
         dataText: "General",
         imgSrc: "/general.png"
     },
     {
+        id: 1,
         dataText: "Skills",
         imgSrc: "/skills.png"
     },
     {
+        id: 2,
         dataText: "Extra",
         imgSrc: "/extra.png"
     },
     {
+        id: 3,
         dataText: "Wishes",
         imgSrc: "/wishes.png"
     }
@@ -65,6 +69,7 @@ export class RecruiterWorkspace extends Component {
                 <div className={blurStyleClass} id="blur">
                     {cardsProps.map(
                         cardProps => <Card
+                            key={cardProps.id}
                             imgSrc={cardProps.imgSrc}
                             dataText={cardProps.dataText}>
                             {loremIpsum}
@@ -84,6 +89,7 @@ export class RecruiterWorkspace extends Component {
                 <div id="popup">
                     {cardsProps.map(
                         cardProps => <Popup
+                            key={cardProps.id}
                             popup={isPopupStyleClass(cardProps.dataText)}
                             dataText={cardProps.dataText}>
                             {loremIpsumFull}
