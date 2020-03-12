@@ -1,5 +1,6 @@
 import {HIDE_POPUP, SHOW_POPUP} from "../constants";
 
+
 const initialState = {};
 
 const popupReducer = (state = initialState, action) => {
