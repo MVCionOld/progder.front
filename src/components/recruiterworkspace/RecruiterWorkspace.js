@@ -21,7 +21,7 @@ export class RecruiterWorkspace extends Component {
     }
 
     fetchCandidates = async () => {
-        apiClientService("list/recruiter/new", {
+        apiClientService("engagement/recruiter/new", {
                 method: "get",
                 headers: {
                     "Content-Type": "application/json"
@@ -58,7 +58,7 @@ export class RecruiterWorkspace extends Component {
             state: invite ? "RA" : "RR",
             candidate: this.state.candidates[this.state.currentCandidateIdx]["user"]["id"]
         });
-        apiClientService("list/recruiter", {
+        apiClientService("engagement/recruiter", {
                 method: "post",
                 headers: {
                     "Content-Type": "application/json"
