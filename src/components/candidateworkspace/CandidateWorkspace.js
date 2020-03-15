@@ -88,8 +88,7 @@ export class CandidateWorkspace extends Component {
                                 recruiterLogin={engagemenentItem.recruiterLogin}
                                 companyName={engagemenentItem.companyName}
                             />)
-                    )
-                    }
+                    )}
                 </div>
             </div>
         );

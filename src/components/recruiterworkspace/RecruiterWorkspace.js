@@ -3,56 +3,67 @@ import {connect} from "react-redux";
 import classNames from 'classnames';
 import Card from './Card';
 import Popup from './Popup';
+import cardsProps from "./CardProps";
 import {RecruiterButton} from "./RecruiterButton";
 import "./RecruiterWorkspace.css";
-
-
-const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor\n" +
-    "                                    incididunt ut.";
-const loremIpsumFull = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore\n" +
-    "                            et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut\n" +
-    "                            aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse\n" +
-    "                            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in\n" +
-    "                            culpa qui officia deserunt mollit anim id est laborum.";
-
-
-const cardsProps = [
-    {
-        id: 0,
-        dataText: "General",
-        imgSrc: "/general.png"
-    },
-    {
-        id: 1,
-        dataText: "Skills",
-        imgSrc: "/skills.png"
-    },
-    {
-        id: 2,
-        dataText: "Extra",
-        imgSrc: "/extra.png"
-    },
-    {
-        id: 3,
-        dataText: "Wishes",
-        imgSrc: "/wishes.png"
-    }
-];
+import apiClientService from "../../services/apiClientService";
 
 
 export class RecruiterWorkspace extends Component {
 
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+            candidates: [],
+            noNewCandidates: true,
+            currentCandidateIdx: 0
+        };
     }
 
+    fetchCandidates = async () => {
+        apiClientService("list/recruiter/new", {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }
+        ).then((candidates) => {
+            if (Array.isArray(candidates) && candidates.length > 0) {
+                this.setState({
+                    candidates: candidates,
+                    noNewCandidates: false
+                })
+            } else {
+                this.setState({
+                    candidates: [],
+                    noNewCandidates: true
+                })
+            }
+        }).catch(reason => {
+            this.setState({
+                candidates: [],
+                noNewCandidates: true
+            })
+        });
+    };
+
+    componentDidMount() {
+        this.fetchCandidates().then(r => {
+        });
+        console.log(this.state.candidates)
+    }
+
+    makeChoice = () => {
+
+
+    };
+
     invite = () => {
-        console.log(this.props);
+        console.log(this.state.candidates);
     };
 
     ignore = () => {
-        console.log(this.props);
+        console.log(this.state.candidates);
     };
 
     render() {
@@ -65,39 +76,42 @@ export class RecruiterWorkspace extends Component {
                 && dataText === this.props.blurProps.popupReducer.cardType
         };
         return (
-            <div className="recruiter-main-container">
-                <div className={blurStyleClass} id="blur">
-                    {cardsProps.map(
-                        cardProps => <Card
-                            key={cardProps.id}
-                            imgSrc={cardProps.imgSrc}
-                            dataText={cardProps.dataText}>
-                            {loremIpsum}
-                        </Card>
-                    )}
-                    <div className={"button"}>
-                        <RecruiterButton type={"ignore"} onClick={this.ignore}>
-                            Ignore
-                        </RecruiterButton>
+            <React.Fragment>
+                {this.state.noNewCandidates ? <h1 className={"recruiter-msg"}>NO NEW CANDIDATES</h1> :
+                    <div className="recruiter-main-container">
+                        <div className={blurStyleClass} id="blur">
+                            {cardsProps.map(
+                                cardProps => <Card
+                                    key={cardProps.id}
+                                    imgSrc={cardProps.imgSrc}
+                                    dataText={cardProps.dataText}>
+                                    {this.state.candidates[this.state.currentCandidateIdx][cardProps.textField]}
+                                </Card>
+                            )}
+                            <div className={"button"}>
+                                <RecruiterButton type={"ignore"} onClick={this.ignore}>
+                                    Ignore
+                                </RecruiterButton>
+                            </div>
+                            <div className={"button"}>
+                                <RecruiterButton type={"invite"} onClick={this.invite}>
+                                    Invite
+                                </RecruiterButton>
+                            </div>
+                        </div>
+                        <div id="popup">
+                            {cardsProps.map(
+                                cardProps => <Popup
+                                    key={cardProps.id}
+                                    popup={isPopupStyleClass(cardProps.dataText)}
+                                    dataText={cardProps.dataText}>
+                                    {this.state.candidates[this.state.currentCandidateIdx][cardProps.textFieldExtended]}
+                                </Popup>
+                            )}
+                        </div>
                     </div>
-                    <div className={"button"}>
-                        <RecruiterButton type={"invite"} onClick={this.invite}>
-                            Invite
-                        </RecruiterButton>
-                    </div>
-                </div>
-                <div id="popup">
-                    {cardsProps.map(
-                        cardProps => <Popup
-                            key={cardProps.id}
-                            popup={isPopupStyleClass(cardProps.dataText)}
-                            dataText={cardProps.dataText}>
-                            {loremIpsumFull}
-                        </Popup>
-                    )}
-                </div>
-            </div>
-        );
+                }
+            </React.Fragment>);
     }
 }
 
