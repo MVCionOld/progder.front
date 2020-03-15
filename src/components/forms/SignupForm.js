@@ -3,6 +3,7 @@ import {Redirect} from 'react-router';
 import "./LoginSignupForm.css";
 import {InputBox} from "./InputBox";
 import {SubmitButton} from "./SubmitButton";
+import {API_URL} from "../../services/apiClientService";
 
 
 function RecruiterSignupForm(props) {
@@ -30,7 +31,7 @@ function RecruiterSignupForm(props) {
             },
             company_name: company
         });
-        const response = await fetch("http://localhost:8000/api/register/recruiter", {
+        const response = await fetch(`${API_URL}register/recruiter`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
@@ -145,7 +146,7 @@ function CandidateSignupForm(props) {
             wishes_info_extended: wishesInfoExtended,
             extra_info_extended: extraInfoExtended
         });
-        const response = await fetch("http://localhost:8000/api/register/candidate", {
+        const response = await fetch(`${API_URL}register/candidate`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json"

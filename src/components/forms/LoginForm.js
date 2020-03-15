@@ -3,6 +3,7 @@ import {Redirect} from 'react-router';
 import "./LoginSignupForm.css";
 import {InputBox} from "./InputBox";
 import {SubmitButton} from "./SubmitButton";
+import {API_URL} from "../../services/apiClientService";
 
 
 export function LoginForm(props) {
@@ -16,7 +17,7 @@ export function LoginForm(props) {
 
     let onSubmit = React.useCallback(async (e) => {
         e.preventDefault();
-        const response = await fetch("http://127.0.0.1:8000/api/token/", {
+        const response = await fetch(`${API_URL}token/`, {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
