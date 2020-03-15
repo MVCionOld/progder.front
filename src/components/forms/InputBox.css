@@ -16,8 +16,8 @@
 }
 
 .box .inputbox input:focus ~ label,
-.box .inputbox input:valid:not(:placeholder-shown) ~ label,
-.box .inputbox input:invalid ~ label {
+.box .inputbox input:valid ~ label,
+.box .inputbox input:invalid:not(:empty) ~ label {
     top: -19px;
     left: 0;
     color: #ff0057;

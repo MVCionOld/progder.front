@@ -71,7 +71,7 @@ export class CandidateWorkspace extends Component {
 
     constructor(props) {
         super(props);
-        this.invites = [];
+        this.invites = engagemenentsItems;
     }
 
     render() {
