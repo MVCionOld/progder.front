@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {Redirect} from 'react-router';
 import "./LoginSignupForm.css";
 import {InputBox} from "./InputBox";
 import {SubmitButton} from "./SubmitButton";
@@ -7,6 +8,9 @@ import {SubmitButton} from "./SubmitButton";
 function RecruiterSignupForm(props) {
 
     const role = props.role.toLowerCase();
+
+    const [redirect, setRedirect] = useState(false);
+
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -17,85 +21,97 @@ function RecruiterSignupForm(props) {
     let onSubmit = React.useCallback(async (e) => {
         e.preventDefault();
         const data = JSON.stringify({
-            username, name, surname, email, company, password
+            user: {
+                username,
+                first_name: name,
+                last_name: surname,
+                email,
+                password
+            },
+            company_name: company
         });
-        await fetch("http://localhost:8000/api/users/", {
+        const response = await fetch("http://localhost:8000/api/register/recruiter", {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
             },
             body: data
-        })
+        });
+        if (response.ok) {
+            setRedirect(true);
+        } else {
+            console.error(response);
+        }
     }, [username, name, surname, email, company, password]);
 
-    const formData = [
+    const formFieldsConstructor = [
         {
+            id: 0,
             type: "text",
-            name: "",
-            required: "",
             label: "Username",
             onChange: (e) => setUsername(e.target.value)
         },
         {
+            id: 1,
             type: "text",
-            name: "",
-            required: "",
             label: "Name",
             onChange: (e) => setName(e.target.value)
         },
         {
+            id: 2,
             type: "text",
-            name: "",
-            required: "",
             label: "Surname",
             onChange: (e) => setSurname(e.target.value)
         },
         {
+            id: 3,
             type: "email",
-            name: "",
-            required: "",
             label: "Email",
             onChange: (e) => setEmail(e.target.value)
         },
         {
+            id: 4,
             type: "text",
-            name: "",
-            required: "",
             label: "Company",
             onChange: (e) => setCompany(e.target.value)
         },
         {
+            id: 5,
             type: "password",
-            name: "",
-            required: "",
             label: "Password",
             onChange: (e) => setPassword(e.target.value)
         },
     ];
 
-    return (
-        <div className="box" id="signup">
-            <h2>Signup as {role}</h2>
-            <form>
-                {formData.map(inputBoxProps => (
-                    <InputBox
-                        type={inputBoxProps.type}
-                        name={inputBoxProps.name}
-                        label={inputBoxProps.label}
-                        required={inputBoxProps.required}
-                        onChange={inputBoxProps.onChange}
-                    />
-                ))}
-                <SubmitButton value={"Submit"} onClick={onSubmit}/>
-            </form>
-        </div>
-    );
+    if (!redirect) {
+        return (
+            <div className="box" id="signup">
+                <h2>Signup as {role}</h2>
+                <form>
+                    {formFieldsConstructor.map(inputBoxProps => (
+                        <InputBox
+                            key={inputBoxProps.id}
+                            type={inputBoxProps.type}
+                            label={inputBoxProps.label}
+                            onChange={inputBoxProps.onChange}
+                        />
+                    ))}
+                    <SubmitButton value={"Submit"} onClick={onSubmit}/>
+                </form>
+            </div>
+        );
+    } else {
+        return <Redirect to={`/${role}/login`}/>;
+    }
 }
 
 
 function CandidateSignupForm(props) {
 
     const role = props.role.toLowerCase();
+
+    const [redirect, setRedirect] = useState(false);
+
     const [username, setUsername] = useState('');
     const [name, setName] = useState('');
     const [surname, setSurname] = useState('');
@@ -113,133 +129,151 @@ function CandidateSignupForm(props) {
     let onSubmit = React.useCallback(async (e) => {
         e.preventDefault();
         const data = JSON.stringify({
-            username, name, surname, email,
-            personalInfo, personalInfoExtended, skillsInfo, skillsInfoExtended, wishesInfo, wishesInfoExtended,
-            extraInfo, extraInfoExtended, password
+            user: {
+                username,
+                first_name: name,
+                last_name: surname,
+                email,
+                password
+            },
+            personal_info: personalInfo,
+            skills_info: skillsInfo,
+            wishes_info: wishesInfo,
+            extra_info: extraInfo,
+            personal_info_extended: personalInfoExtended,
+            skills_info_extended: skillsInfoExtended,
+            wishes_info_extended: wishesInfoExtended,
+            extra_info_extended: extraInfoExtended
         });
-        await fetch("http://localhost:8000/api/users/", {
+        const response = await fetch("http://localhost:8000/api/register/candidate", {
             method: "post",
             headers: {
                 "Content-Type": "application/json"
             },
             body: data
-        })
-    }, [username, name, surname, email,
-        personalInfo, personalInfoExtended, skillsInfo, skillsInfoExtended, wishesInfo, wishesInfoExtended,
-        extraInfo, extraInfoExtended, password]);
+        });
+        if (response.ok) {
+            setRedirect(true);
+        } else {
+            console.error(response);
+        }
+    }, [
+        username,
+        name,
+        surname,
+        email,
+        personalInfo,
+        personalInfoExtended,
+        skillsInfo,
+        skillsInfoExtended,
+        wishesInfo,
+        wishesInfoExtended,
+        extraInfo,
+        extraInfoExtended,
+        password
+    ]);
 
-    const formData = [
+    const formFieldsConstructor = [
         {
+            id: 0,
             type: "text",
-            name: "",
-            required: "",
             label: "Username",
             onChange: (e) => setUsername(e.target.value)
         },
         {
+            id: 1,
             type: "text",
-            name: "",
-            required: "",
             label: "Name",
             onChange: (e) => setName(e.target.value)
         },
         {
+            id: 2,
             type: "text",
-            name: "",
-            required: "",
             label: "Surname",
             onChange: (e) => setSurname(e.target.value)
         },
         {
+            id: 3,
             type: "email",
-            name: "",
-            required: "",
             label: "Email",
             onChange: (e) => setEmail(e.target.value)
         },
         {
+            id: 4,
             type: "text",
-            name: "",
-            required: "",
             label: "Personal info",
             onChange: (e) => setPersonalInfo(e.target.value)
         },
         {
+            id: 5,
             type: "text",
-            name: "",
-            required: "",
             label: "Personal info (extended)",
             onChange: (e) => setPersonalInfoExtended(e.target.value)
         },
-
         {
+            id: 6,
             type: "text",
-            name: "",
-            required: "",
             label: "Skills info",
             onChange: (e) => setSkillsInfo(e.target.value)
         },
         {
+            id: 7,
             type: "text",
-            name: "",
-            required: "",
             label: "Skills info (extended)",
             onChange: (e) => setSkillsInfoExtended(e.target.value)
         },
         {
+            id: 8,
             type: "text",
-            name: "",
-            required: "",
             label: "Wishes info",
             onChange: (e) => setWishesInfo(e.target.value)
         },
         {
+            id: 9,
             type: "text",
-            name: "",
-            required: "",
             label: "Wishes info (extended)",
             onChange: (e) => setWishesInfoExtended(e.target.value)
         },
         {
+            id: 10,
             type: "text",
-            name: "",
-            required: "",
             label: "Extra info",
             onChange: (e) => setExtraInfo(e.target.value)
         },
         {
+            id: 11,
             type: "text",
-            name: "",
-            required: "",
             label: "Extra info (extended)",
             onChange: (e) => setExtraInfoExtended(e.target.value)
         },
         {
+            id: 12,
             type: "password",
-            name: "",
-            required: "",
             label: "Password",
             onChange: (e) => setPassword(e.target.value)
         },
     ];
 
-    return (
-        <div className="box" id="signup">
-            <h2>Signup as {role}</h2>
-            <form>
-                {formData.map(inputBoxProps => (
-                    <InputBox
-                        type={inputBoxProps.type}
-                        name={inputBoxProps.name}
-                        label={inputBoxProps.label}
-                        required={inputBoxProps.required}
-                        onChange={inputBoxProps.onChange}
-                    />
-                ))}
-                <SubmitButton value={"Submit"} onClick={onSubmit}/>
-            </form>
-        </div>
-    );
+    if (!redirect) {
+        return (
+            <div className="box" id="signup">
+                <h2>Signup as {role}</h2>
+                <form>
+                    {formFieldsConstructor.map(inputBoxProps => (
+                        <InputBox
+                            key={inputBoxProps.id}
+                            type={inputBoxProps.type}
+                            label={inputBoxProps.label}
+                            onChange={inputBoxProps.onChange}
+                        />
+                    ))}
+                    <SubmitButton value={"Submit"} onClick={onSubmit}/>
+                </form>
+            </div>
+        );
+    } else {
+        return <Redirect to={`/${role}/login`}/>;
+    }
 }
 
 export function SignupForm(props) {

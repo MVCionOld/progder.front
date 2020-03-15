@@ -1,10 +1,15 @@
 import React, {useState} from 'react';
+import {Redirect} from 'react-router';
 import "./LoginSignupForm.css";
 import {InputBox} from "./InputBox";
 import {SubmitButton} from "./SubmitButton";
 
 
 export function LoginForm(props) {
+
+    const role = props.role.toLowerCase();
+
+    const [redirect, setRedirect] = useState(false);
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -25,6 +30,7 @@ export function LoginForm(props) {
             const {access, refresh} = await response.json();
             window.localStorage.setItem("access", access);
             window.localStorage.setItem("refresh", refresh);
+            setRedirect(true);
         } else {
             console.error(response);
         }
@@ -45,20 +51,24 @@ export function LoginForm(props) {
         }
     ];
 
-    return (
-        <div className="box" id="login">
-            <h2>Login as {props.role.toLowerCase()}</h2>
-            <form>
-                {formFieldsConstructor.map((inputBoxProps => {
-                    return <InputBox
-                        key={inputBoxProps.id}
-                        type={inputBoxProps.type}
-                        label={inputBoxProps.label}
-                        onChange={inputBoxProps.onChange}
-                    />
-                }))}
-                <SubmitButton value={"Submit"} onClick={onSubmit}/>
-            </form>
-        </div>
-    );
+    if (!redirect) {
+        return (
+            <div className="box" id="login">
+                <h2>Login as {role}</h2>
+                <form>
+                    {formFieldsConstructor.map((inputBoxProps => {
+                        return <InputBox
+                            key={inputBoxProps.id}
+                            type={inputBoxProps.type}
+                            label={inputBoxProps.label}
+                            onChange={inputBoxProps.onChange}
+                        />
+                    }))}
+                    <SubmitButton value={"Submit"} onClick={onSubmit}/>
+                </form>
+            </div>
+        );
+    } else {
+        return <Redirect to={`/${role}/invites`}/>
+    }
 }

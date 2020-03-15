@@ -6,8 +6,7 @@ export const InputBox = props => (
     <div className="inputbox">
         <input
             type={props.type}
-            value={props.value}
-            placeholder={""}
+            placeholder={" "}
             onChange={props.onChange}
             required
         />

@@ -17,7 +17,7 @@
 
 .box .inputbox input:focus ~ label,
 .box .inputbox input:valid ~ label,
-.box .inputbox input:invalid:not(:empty) ~ label {
+.box .inputbox input:not(:placeholder-shown) ~ label {
     top: -19px;
     left: 0;
     color: #ff0057;
