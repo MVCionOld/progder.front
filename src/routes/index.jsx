@@ -11,7 +11,7 @@ const MainRouter = () => {
         <Switch>
             <Route exact path={'/'} component={RoleMenu}/>
             <Route path={'/candidate/invites'} component={CandidateApp}/>
-            <Route path={'/recruiter/interviews'} component={RecruiterApp}/>
+            <Route path={'/recruiter/invites'} component={RecruiterApp}/>
             <Route exact path={'/:role'} component={EnterMenu}/>
             <Route exact path={'/:role/:action'} component={EnterApp}/>
         </Switch>
