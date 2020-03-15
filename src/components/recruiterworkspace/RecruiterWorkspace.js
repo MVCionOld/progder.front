@@ -31,6 +31,7 @@ export class RecruiterWorkspace extends Component {
             if (Array.isArray(candidates) && candidates.length > 0) {
                 this.setState({
                     candidates: candidates,
+                    currentCandidateIdx: 0,
                     noNewCandidates: false
                 })
             } else {
@@ -50,20 +51,30 @@ export class RecruiterWorkspace extends Component {
     componentDidMount() {
         this.fetchCandidates().then(r => {
         });
-        console.log(this.state.candidates)
     }
 
-    makeChoice = () => {
-
-
-    };
-
-    invite = () => {
-        console.log(this.state.candidates);
-    };
-
-    ignore = () => {
-        console.log(this.state.candidates);
+    makeChoice = (invite) => {
+        const body = JSON.stringify({
+            state: invite ? "RA" : "RR",
+            candidate: this.state.candidates[this.state.currentCandidateIdx]["user"]["id"]
+        });
+        apiClientService("list/recruiter", {
+                method: "post",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: body,
+            }
+        ).then(r => {
+        });
+        if (this.state.currentCandidateIdx === this.state.candidates.length - 1) {
+            this.fetchCandidates().then(r => {
+            });
+        } else {
+            this.setState({
+                currentCandidateIdx: this.state.currentCandidateIdx + 1
+            });
+        }
     };
 
     render() {
@@ -89,12 +100,12 @@ export class RecruiterWorkspace extends Component {
                                 </Card>
                             )}
                             <div className={"button"}>
-                                <RecruiterButton type={"ignore"} onClick={this.ignore}>
+                                <RecruiterButton type={"ignore"} onClick={() => this.makeChoice(false)}>
                                     Ignore
                                 </RecruiterButton>
                             </div>
                             <div className={"button"}>
-                                <RecruiterButton type={"invite"} onClick={this.invite}>
+                                <RecruiterButton type={"invite"} onClick={() => this.makeChoice(true)}>
                                     Invite
                                 </RecruiterButton>
                             </div>
