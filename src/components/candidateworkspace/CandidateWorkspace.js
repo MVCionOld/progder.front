@@ -1,96 +1,103 @@
 import React, {Component} from 'react';
 import {EngagementItem} from "./EngagementItem";
 import './CandidateWorkspace.css';
-
-
-const engagemenentsItems = [
-    {
-        "id": 1,
-        "companyName": "Tinkoff",
-        "recruiterLogin": "e.ruzaykina"
-    },
-    {
-        "id": 2,
-        "companyName": "Yandex",
-        "recruiterLogin": "o.arifanova"
-    },
-    {
-        "id": 3,
-        "companyName": "Abbyy",
-        "recruiterLogin": "t.lebedev"
-    },
-    {
-        "id": 4,
-        "companyName": "1C",
-        "recruiterLogin": "n.starichkov"
-    },
-    {
-        "id": 5,
-        "companyName": "Tinkoff",
-        "recruiterLogin": "e.ruzaykina"
-    },
-    {
-        "id": 6,
-        "companyName": "Yandex",
-        "recruiterLogin": "o.arifanova"
-    },
-    {
-        "id": 7,
-        "companyName": "Abbyy",
-        "recruiterLogin": "t.lebedev"
-    },
-    {
-        "id": 8,
-        "companyName": "1C",
-        "recruiterLogin": "n.starichkov"
-    },
-    {
-        "id": 9,
-        "companyName": "Tinkoff",
-        "recruiterLogin": "e.ruzaykina"
-    },
-    {
-        "id": 10,
-        "companyName": "Yandex",
-        "recruiterLogin": "o.arifanova"
-    },
-    {
-        "id": 11,
-        "companyName": "Abbyy",
-        "recruiterLogin": "t.lebedev"
-    },
-    {
-        "id": 12,
-        "companyName": "1C",
-        "recruiterLogin": "n.starichkov"
-    }
-];
+import apiClientService from "../../services/apiClientService";
 
 
 export class CandidateWorkspace extends Component {
 
     constructor(props) {
         super(props);
-        this.invites = engagemenentsItems;
+        this.state = {
+            invites: [],
+            noNewInvites: true,
+            invitesCheckedCnt: 0
+        };
     }
 
-    render() {
-        if (this.invites.length === 0) {
-            return <h1 className={"candidate-msg"}>NO INVITES VISIT LATER</h1>;
-        }
-        return (
-            <div className={"candidate-main-container"}>
-                <div className={"container"}>
-                    {this.invites.map(
-                        engagemenentItem => (
-                            <EngagementItem
-                                key={engagemenentItem.id}
-                                recruiterLogin={engagemenentItem.recruiterLogin}
-                                companyName={engagemenentItem.companyName}
-                            />)
-                    )}
-                </div>
-            </div>
-        );
+    fetchInvites = async () => {
+        apiClientService("engagement/candidate", {
+                method: "get",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+            }
+        ).then((invites) => {
+            if (Array.isArray(invites) && invites.length > 0) {
+                this.setState({
+                    invites: invites,
+                    noNewInvites: false,
+                    invitesCheckedCnt: 0
+                });
+                console.log(this.state)
+            } else {
+                this.setState({
+                    invites: [],
+                    noNewInvites: true,
+                    invitesCheckedCnt: 0
+                });
+            }
+        }).catch(reason => {
+            this.setState({
+                invites: [],
+                noNewInvites: true,
+                invitesCheckedCnt: 0
+            });
+        });
+    };
+
+    componentDidMount() {
+        this.fetchInvites().then(r => {
+        });
     }
+
+    makeChoice = (accept, engagementItem) => {
+        this.setState({
+            invitesCheckedCnt: this.state.invitesCheckedCnt + 1
+        });
+        const body = JSON.stringify({
+            ...engagementItem,
+            state: accept ? "CA" : "CR"
+        });
+        apiClientService(`engagement/candidate/${engagementItem.id}`, {
+                method: "put",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: body,
+            }
+        ).then(r => {
+        });
+        if (this.state.invitesCheckedCnt === this.state.invites.length) {
+            this.fetchInvites().then(r => {
+            });
+        } else {
+            this.setState({
+                invitesCheckedCnt: this.state.invitesCheckedCnt + 1
+            });
+        }
+    };
+
+    render() {
+        return (
+            <React.Fragment>
+                {this.state.noNewInvites ? <h1 className={"candidate-msg"}>NO INVITES VISIT LATER</h1> :
+                    <div className={"candidate-main-container"}>
+                        <div className={"container"}>
+                            {this.state.invites.map(
+                                engagemenentItem => (
+                                    <EngagementItem
+                                        key={engagemenentItem.id}
+                                        recruiterLogin={engagemenentItem.recruiter.user.username}
+                                        companyName={engagemenentItem.recruiter.company_name}
+                                        onAccept={() => this.makeChoice(true, engagemenentItem)}
+                                        onReject={() => this.makeChoice(false, engagemenentItem)}
+                                    />)
+                            )}
+                        </div>
+                    </div>
+                }
+            </React.Fragment>
+        );
+    };
 }

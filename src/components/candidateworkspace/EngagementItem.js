@@ -1,80 +1,72 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
+import classNames from 'classnames';
 import {EngagementButton} from "./EngagementButton";
 import './EngagementItem.css';
 
 
-export class EngagementItem extends Component {
+export const EngagementItem = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            mounted: true,
-            accepted: null
-        };
-    }
+    const [mounted, setMounted] = useState(true);
+    const [accepted, setAccepted] = useState(null);
 
-    handleUnmounting = () => {
-        this.setState(() => ({
-            mounted: false
-        }));
+    const handleUnmounting = () => setMounted(false);
+
+    const msTimeOut = 1400;
+
+    const handleUnmountWithAcceptance = () => {
+        setAccepted(true);
+        setTimeout(handleUnmounting, msTimeOut);
+        props.onAccept();
+    };
+    const handleUnmountWithRecejtion = () => {
+        setAccepted(false);
+        setTimeout(handleUnmounting, msTimeOut);
+        props.onReject();
     };
 
-    handleUnmountWithAcceptance = () => {
-        console.log("Accepted");
-        this.setState(() => ({
-            accepted: true
-        }));
-        setTimeout(this.handleUnmounting, 1400);
-    };
+    const flipCardAcceptClass = classNames({
+        "accept": true,
+        "activated": accepted
+    });
+    const flipCardRejectClass = classNames({
+        "reject": true,
+        "activated": !accepted
+    });
 
-    handleUnmountWithRecejtion = () => {
-        console.log("Rejected");
-        this.setState(() => ({
-            accepted: false
-        }));
-        setTimeout(this.handleUnmounting, 1400);
-    };
+    const contentClass = classNames({
+        "content": true,
+        "selected": accepted !== null,
+        "accepted": accepted,
+        "rejected": accepted === false
+    });
 
-    render = () => {
-        const flipCardAcceptClass = this.state.accepted === true
-            ? "accept activated"
-            : "accept";
-        const flipCardRejectClass = this.state.accepted === false
-            ? "reject activated"
-            : "reject";
-        const contentClass = this.state.accepted === null
-            ? "content"
-            : (this.state.accepted
-                ? "content selected accepted"
-                : "content selected rejected");
-        return (
-            this.state.mounted &&
-            <div className={"engagement-item"}>
-                <div className={"flip-card"}>
-                    <div className={flipCardAcceptClass}>
-                        <h2>accept</h2>
-                    </div>
-                    <div className={flipCardRejectClass}>
-                        <h2>reject</h2>
-                    </div>
+    return (
+        mounted &&
+        <div className={"engagement-item"}>
+            <div className={"flip-card"}>
+                <div className={flipCardAcceptClass}>
+                    <h2>accept</h2>
                 </div>
-                <div className={contentClass}>
-                    <h3>Invite from<br/>{this.props.recruiterLogin}</h3>
-                    <p>Company:<br/>{this.props.companyName}</p>
-                    <div className="btns">
-                        <EngagementButton
-                            type={"reject-btn"}
-                            onClick={this.handleUnmountWithRecejtion}>
-                            Reject
-                        </EngagementButton>
-                        <EngagementButton
-                            type={"accept-btn"}
-                            onClick={this.handleUnmountWithAcceptance}>
-                            Accept
-                        </EngagementButton>
-                    </div>
+                <div className={flipCardRejectClass}>
+                    <h2>reject</h2>
                 </div>
             </div>
-        );
-    }
-}
+            <div className={contentClass}>
+                <h3>Invite from<br/>{props.recruiterLogin}</h3>
+                <p>Company:<br/>{props.companyName}</p>
+                <div className="btns">
+                    <EngagementButton
+                        type={"reject-btn"}
+                        onClick={handleUnmountWithRecejtion}>
+                        Reject
+                    </EngagementButton>
+                    <EngagementButton
+                        type={"accept-btn"}
+                        onClick={handleUnmountWithAcceptance}>
+                        Accept
+                    </EngagementButton>
+                </div>
+            </div>
+        </div>
+    );
+};
