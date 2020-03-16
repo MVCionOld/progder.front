@@ -30,7 +30,7 @@ export const EngagementItem = (props) => {
     });
     const flipCardRejectClass = classNames({
         "reject": true,
-        "activated": !accepted
+        "activated": accepted === false
     });
 
     const contentClass = classNames({
