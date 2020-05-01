@@ -1,6 +1,6 @@
 import React, {useState, Component} from 'react';
 import classNames from 'classnames';
-import './CircularMenu.css';
+import './CircularMenu.sass';
 
 
 const CircularMenuItem = (props) => {

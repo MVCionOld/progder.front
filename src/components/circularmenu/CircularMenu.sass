@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900&display=swap')
+
+.circular-menu
+  display: flex
+  position: fixed
+  width: 300px
+  height: 300px
+  top: 100%
+  left: 100%
+  transform: translate(-100%, -100%)
+
+.circular-menu__item
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  display: flex
+  align-items: center
+  justify-content: center
+  width: 80px
+  height: 80px
+  border-radius: 50%
+  text-decoration: none
+  color: #f6f6e9
+  background-color: #ff0057
+  transition: 0.5s
+  outline: none
+
+.circular-menu__button
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  width: 80px
+  height: 80px
+  border-radius: 50%
+  background-color: #ff0057
+  outline: none
+
+.circular-menu__lines,
+.circular-menu__lines::before,
+.circular-menu__lines::after
+  position: absolute
+  width: 40px
+  height: 6px
+  background-color: #f6f6e9
+  transition: 0.8s
+
+.circular-menu__lines
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+  background-color: transparent
+  &::before
+    content: ''
+  &::after
+    content: ''
+    transform: rotate(90deg)
+
+.circular-menu__button_active
+  background-color: #333333
+  .circular-menu__lines
+    &::before
+      transform: rotate(405deg)
+    &::after
+      transform: rotate(315deg)
