@@ -1,0 +1,31 @@
+.box
+  .inputbox
+    position: relative
+    input
+      width: 100%
+      padding: 10px 0
+      font-size: 16px
+      color: #fff
+      letter-spacing: 1px
+      margin-bottom: 30px
+      border: none
+      border-bottom: 1px solid #fff
+      outline: none
+      background: transparent
+    label
+      position: absolute
+      top: 0
+      left: 0
+      padding: 10px 0
+      font-size: 16px
+      color: #fff
+      letter-spacing: 1px
+      pointer-events: none
+      transition: .3s
+.box .inputbox input:focus ~ label,
+.box .inputbox input:valid ~ label,
+.box .inputbox input:not(:placeholder-shown) ~ label
+  top: -19px
+  left: 0
+  color: #ff0057
+  font-size: 12px

@@ -1,5 +1,5 @@
 import React from 'react';
-import "./InputBox.css";
+import "./InputBox.sass";
 
 
 export const InputBox = props => (
