@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import {connect} from "react-redux";
 import classNames from 'classnames';
 import {hidePopup} from "../../actions";
-import "./Popup.css";
+import "./Popup.sass";
 
 
 export class Popup extends Component {
