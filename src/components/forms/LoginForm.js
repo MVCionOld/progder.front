@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {Redirect} from 'react-router';
-import "./LoginSignupForm.css";
+import "./LoginSignupForm.sass";
 import {InputBox} from "./InputBox";
 import {SubmitButton} from "./SubmitButton";
 import {API_URL} from "../../services/apiClientService";
