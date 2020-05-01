@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import "./SelectionMenu.css";
+import "./SelectionMenu.sass";
 
 
 const Selection = props => (
