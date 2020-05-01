@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import classNames from 'classnames';
 import {EngagementButton} from "./EngagementButton";
-import './EngagementItem.css';
+import './EngagementItem.sass';
 
 
 export const EngagementItem = (props) => {
