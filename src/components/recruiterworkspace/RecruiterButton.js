@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import './RecruiterButton.css';
+import './RecruiterButton.sass';
 
 
 export const RecruiterButton = (props) => {

@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins:400,500,600,700,800,900&display=swap')
+
+.vote-button
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)
+
+.recruiter-button
+  position: relative
+  top: 0
+  left: 50%
+  transform: translate(-50%, -10%)
+  width: 125px
+  height: 125px
+  border-radius: 100%
+  background-color: #3d3d3d
+  outline: none
+  .button-ignore
+    @extend .vote-button
+  .button-invite
+    @extend .vote-button
+  &:hover
+    cursor: pointer
+    .button-ignore
+      h1
+        color: #ff0057
+    .button-invite
+      h1
+        color: #81ecec
