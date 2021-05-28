@@ -1,4 +1,4 @@
-FROM node:13.12.0-alpine
+FROM node:16
 
 # set working directory
 WORKDIR /app
@@ -6,11 +6,13 @@ WORKDIR /app
 # install app dependencies
 COPY package.json ./
 COPY package-lock.json ./
-RUN npm install --silent
-RUN npm install react-scripts@3.4.1 -g --silent
+RUN npm i --silent
+RUN npm i react-scripts --silent
+RUN npm audit fix --force --silent
 
 # add app
-COPY . ./
+COPY public public
+COPY src src
 
 # start app
 CMD ["npm", "start"]
