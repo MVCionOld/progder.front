@@ -1,18 +1,20 @@
 FROM node:16
 
-# set working directory
 WORKDIR /app
 
-# install app dependencies
-COPY package.json ./
-COPY package-lock.json ./
-RUN npm i --silent
-RUN npm i react-scripts --silent
-RUN npm audit fix --force --silent
+COPY package.json package.json
+COPY package-lock.json package-lock.json
 
-# add app
+RUN npm config rm proxy
+RUN npm config rm https-proxy
+RUN npm config set registry http://registry.npmjs.org
+
+RUN npm install npm
+RUN npm install
+
 COPY public public
 COPY src src
 
-# start app
+EXPOSE 3000
+
 CMD ["npm", "start"]
