@@ -22,19 +22,18 @@ function RecruiterSignupForm(props) {
     let onSubmit = React.useCallback(async (e) => {
         e.preventDefault();
         const data = JSON.stringify({
-            user: {
-                username,
-                first_name: name,
-                last_name: surname,
-                email,
-                password
-            },
-            company_name: company
+            username: username,
+            firstName: name,
+            lastName: surname,
+            email: email,
+            password: password,
+            companyName: company
         });
         const response = await fetch(`${API_URL}register/recruiter`, {
             method: "post",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
             },
             body: data
         });
@@ -102,7 +101,7 @@ function RecruiterSignupForm(props) {
             </div>
         );
     } else {
-        return <Redirect to={`/${role}/login`}/>;
+        return <Redirect to={`/${role}/invites`}/>;
     }
 }
 
@@ -130,26 +129,25 @@ function CandidateSignupForm(props) {
     let onSubmit = React.useCallback(async (e) => {
         e.preventDefault();
         const data = JSON.stringify({
-            user: {
-                username,
-                first_name: name,
-                last_name: surname,
-                email,
-                password
-            },
-            personal_info: personalInfo,
-            skills_info: skillsInfo,
-            wishes_info: wishesInfo,
-            extra_info: extraInfo,
-            personal_info_extended: personalInfoExtended,
-            skills_info_extended: skillsInfoExtended,
-            wishes_info_extended: wishesInfoExtended,
-            extra_info_extended: extraInfoExtended
+            username: username,
+            firstName: name,
+            lastName: surname,
+            email: email,
+            password: password,
+            personalInfo: personalInfo,
+            personalInfoExtended: personalInfoExtended,
+            skillsInfo: skillsInfo,
+            skillsInfoExtended: skillsInfoExtended,
+            wishesInfo: wishesInfo,
+            wishesInfoExtended: wishesInfoExtended,
+            extraInfo: extraInfo,
+            extraInfoExtended: extraInfoExtended
         });
         const response = await fetch(`${API_URL}register/candidate`, {
             method: "post",
             headers: {
-                "Content-Type": "application/json"
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*"
             },
             body: data
         });

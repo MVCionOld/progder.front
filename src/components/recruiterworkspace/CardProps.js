@@ -3,29 +3,29 @@ const cardsProps = [
         id: 0,
         dataText: "General",
         imgSrc: "/general.png",
-        textField: "personal_info",
-        textFieldExtended: "personal_info_extended"
+        textField: "personalInfo",
+        textFieldExtended: "personalInfoExtended"
     },
     {
         id: 1,
         dataText: "Skills",
         imgSrc: "/skills.png",
-        textField: "skills_info",
-        textFieldExtended: "skills_info_extended"
+        textField: "skillsInfo",
+        textFieldExtended: "skillsInfoExtended"
     },
     {
         id: 2,
         dataText: "Extra",
         imgSrc: "/extra.png",
-        textField: "extra_info",
-        textFieldExtended: "extra_info_extended"
+        textField: "extraInfo",
+        textFieldExtended: "extraInfoExtended"
     },
     {
         id: 3,
         dataText: "Wishes",
         imgSrc: "/wishes.png",
-        textField: "wishes_info",
-        textFieldExtended: "wishes_info_extended"
+        textField: "wishesInfo",
+        textFieldExtended: "wishesInfoExtended"
     }
 ];
 

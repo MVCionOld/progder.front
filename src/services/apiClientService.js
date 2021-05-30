@@ -1,4 +1,4 @@
-export const API_URL = 'http://localhost:8000/api/';
+export const API_URL = 'http://127.0.0.1:8000/api/';
 
 const refreshApiToken = async () => {
     const refresh = window.localStorage.getItem("refresh");
@@ -24,12 +24,12 @@ const refreshApiToken = async () => {
 };
 
 let apiClientService = async (url, params) => {
-    await refreshApiToken();
-    const accessToken = window.localStorage.getItem("access");
+    // await refreshApiToken();
+    // const accessToken = window.localStorage.getItem("access");
     const headers = {};
-    if (accessToken) {
-        headers.Authorization = `Bearer ${accessToken}`;
-    }
+    // if (accessToken) {
+    //     headers.Authorization = `Bearer ${accessToken}`;
+    // }
     const apiParams = {
         ...params,
         headers: {

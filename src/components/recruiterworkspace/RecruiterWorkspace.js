@@ -54,19 +54,19 @@ export class RecruiterWorkspace extends Component {
     }
 
     makeChoice = (invite) => {
-        const body = JSON.stringify({
-            state: invite ? "RA" : "RR",
-            candidate: this.state.candidates[this.state.currentCandidateIdx]["user"]["id"]
-        });
-        apiClientService("engagement/recruiter", {
-                method: "post",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: body,
-            }
-        ).then(r => {
-        });
+        // const body = JSON.stringify({
+        //     state: invite ? "RA" : "RR",
+        //     candidate: this.state.candidates[this.state.currentCandidateIdx]["id"]
+        // });
+        // apiClientService("engagement/recruiter", {
+        //         method: "post",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: body,
+        //     }
+        // ).then(r => {
+        // });
         if (this.state.currentCandidateIdx === this.state.candidates.length - 1) {
             this.fetchCandidates().then(r => {
             });
